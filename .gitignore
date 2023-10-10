@@ -1,0 +1,18 @@
+# CMake
+CMakeUserPresets.json
+CMakeCache.txt
+CMakeFiles
+
+# Build files
+build
+bin
+
+# Clangd
+.cache
+
+# VS Code/VS
+.vscode
+.vs
+
+# personal - dev
+.nvim-dap.lua
