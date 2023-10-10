@@ -1,7 +1,3 @@
-#include <Poco/Foundation.h>
-
-#if defined(POCO_OS_FAMILY_WINDOWS)
-
 #include "lcuProcessHandlerImpl.h"
 
 #include "exception.h"
@@ -238,5 +234,3 @@ bool isInteger(std::string_view str)
 }
 
 }
-
-#endif

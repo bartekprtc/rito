@@ -13,21 +13,27 @@ add_library(rito STATIC
     src/lcuWampHandler.cpp
     src/lcuProcessHandler.cpp
     src/lcuProcessHandlerHelpers.cpp
-    src/platform/linux/lcuProcessHandlerImplLinux.cpp
-    src/platform/windows/lcuProcessHandlerImplWindows.cpp
 )
 
-target_include_directories(rito PUBLIC "inc/")
-
-
 if (LINUX)
-    target_include_directories(rito PRIVATE "src/platform/linux/inc/")
+    target_include_directories(rito PRIVATE src/platform/linux/inc/)
+    target_sources(rito PRIVATE
+        src/platform/linux/lcuProcessHandlerImplLinux.cpp
+    )
 elseif (WIN32)
-    target_include_directories(rito PRIVATE "src/platform/windows/inc/")
+    target_include_directories(rito PRIVATE src/platform/windows/inc/)
+    target_sources(rito PRIVATE
+        src/platform/windows/lcuProcessHandlerImplLinux.cpp
+    )
 endif()
 
 target_include_directories(rito PRIVATE "src/inc/")
+
+# Public headers visible internally without rito/ prefix
 target_include_directories(rito PRIVATE "inc/rito/")
+
+target_include_directories(rito PUBLIC "inc/")
+
 
 target_link_libraries(rito PRIVATE
     Poco::Net

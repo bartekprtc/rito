@@ -1,15 +1,11 @@
-#include <Poco/Foundation.h>
+#include "lcuProcessHandlerImpl.h"
 
-#if defined(POCO_OS_FAMILY_UNIX)
+#include "exception.h"
+#include "lcuProcessHandlerHelpers.h"
 
-  #include "lcuProcessHandlerImpl.h"
-
-  #include "exception.h"
-  #include "lcuProcessHandlerHelpers.h"
-
-  #include <cctype>
-  #include <filesystem>
-  #include <fstream>
+#include <cctype>
+#include <filesystem>
+#include <fstream>
 
 namespace rito {
 
@@ -54,5 +50,3 @@ std::string LcuProcessHandlerImpl::getLcuProcessCommand()
 }
 
 } // namespace rito
-
-#endif
