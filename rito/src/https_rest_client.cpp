@@ -1,4 +1,4 @@
-#include "httpsRestClient.h"
+#include "https_rest_client.h"
 
 #include "exception.h"
 
@@ -17,7 +17,7 @@ using Poco::Net::HTTPMessage;
 using Poco::Net::HTTPRequest;
 using Poco::Net::HTTPResponse;
 
-HttpsRestClient::HttpsRestClient(const std::string& host, std::uint16_t port)
+Https_rest_client::Https_rest_client(const std::string& host, std::uint16_t port)
   : m_host{host},
     m_port{port},
     m_context{new Context(Context::TLS_CLIENT_USE, "", "", "", Context::VERIFY_NONE)},
@@ -25,18 +25,18 @@ HttpsRestClient::HttpsRestClient(const std::string& host, std::uint16_t port)
 {
 }
 
-HttpResponse HttpsRestClient::request(RequestType type,
-                                      const std::string& pathAndQuery,
-                                      const KeyValueMap& headers)
+Http_response Https_rest_client::request(Request_type type,
+                                         const std::string& path_and_query,
+                                         const Key_value_map& headers)
 {
-    sendRequest(toPocoRequestType(type), pathAndQuery, headers);
+    send_request(to_poco_request_type(type), path_and_query, headers);
 
-    return receiveResponse();
+    return receive_response();
 }
 
-void HttpsRestClient::sendRequest(const std::string& type,
-                                  const std::string& pathAndQuery,
-                                  const KeyValueMap& headers)
+void Https_rest_client::send_request(const std::string& type,
+                                     const std::string& pathAndQuery,
+                                     const Key_value_map& headers)
 {
     HTTPRequest request(type, pathAndQuery, HTTPMessage::HTTP_1_1);
     request.setHost(m_host, m_port);
@@ -55,52 +55,52 @@ void HttpsRestClient::sendRequest(const std::string& type,
     m_session.sendRequest(request);
 }
 
-HttpResponse HttpsRestClient::receiveResponse()
+Http_response Https_rest_client::receive_response()
 {
     try
     {
         HTTPResponse response;
-        auto& responseStream{m_session.receiveResponse(response)};
+        auto& response_stream{m_session.receiveResponse(response)};
 
-        HttpResponse res{.status = response.getStatus(), .reason = response.getReason()};
-        responseStream >> res.response;
+        Http_response res{.status = response.getStatus(), .reason = response.getReason()};
+        response_stream >> res.response;
 
         return res;
     }
     catch (Poco::Net::MessageException& e)
     {
-        throw MessageException{
+        throw Message_exception{
           std::format("Unable to receive message from the server({})", e.what())};
     }
 
-    throw UnknownException{"HttpsRestClient: Unexpected error while receiving message"};
+    throw Unknown_exception{"HttpsRestClient: Unexpected error while receiving message"};
 }
 
-std::string toPocoRequestType(RequestType type)
+std::string to_poco_request_type(Request_type type)
 {
     switch (type)
     {
-        case RequestType::CONNECT:
+        case Request_type::http_connect:
             return HTTPRequest::HTTP_CONNECT;
-        case RequestType::DELETE:
+        case Request_type::http_delete:
             return HTTPRequest::HTTP_DELETE;
-        case RequestType::GET:
+        case Request_type::http_get:
             return HTTPRequest::HTTP_GET;
-        case RequestType::HEAD:
+        case Request_type::http_head:
             return HTTPRequest::HTTP_HEAD;
-        case RequestType::OPTIONS:
+        case Request_type::http_options:
             return HTTPRequest::HTTP_OPTIONS;
-        case RequestType::PATCH:
+        case Request_type::http_patch:
             return HTTPRequest::HTTP_PATCH;
-        case RequestType::POST:
+        case Request_type::http_post:
             return HTTPRequest::HTTP_POST;
-        case RequestType::PUT:
+        case Request_type::http_put:
             return HTTPRequest::HTTP_PUT;
-        case RequestType::TRACE:
+        case Request_type::http_trace:
             return HTTPRequest::HTTP_TRACE;
     }
 
-    throw WrongEnumValueException{"Unknown RequestType enum value"};
+    throw Wrong_enum_value_exception{"Unknown RequestType enum value"};
 }
 
 } // namespace rito

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "lcuProcessHandler.h"
+#include "lcu_process_handler.h"
 
 #include <windows.h>
 #include <winternl.h>
@@ -8,14 +8,14 @@
 #include <string>
 
 typedef NTSTATUS(NTAPI* NtQueryInformationProcessPtr)(
-        IN HANDLE ProcessHandle, 
-        IN PROCESSINFOCLASS ProcessInformationClass, 
-        OUT PVOID ProcessInformation, 
-        IN ULONG ProcessInformationLength, 
+        IN HANDLE ProcessHandle,
+        IN PROCESSINFOCLASS ProcessInformationClass,
+        OUT PVOID ProcessInformation,
+        IN ULONG ProcessInformationLength,
         OUT PULONG ReturnLength OPTIONAL);
 
 namespace rito {
-   
+
 
 class LcuProcessHandlerImpl
 {

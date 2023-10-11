@@ -11,53 +11,52 @@ public:
     Exception(const std::string& what) : std::runtime_error{what} {}
 };
 
-class UnknownException : public Exception
+class Unknown_exception : public Exception
 {
 public:
-    UnknownException(const std::string& what) : Exception{what} {}
+    Unknown_exception(const std::string& what) : Exception{what} {}
 };
 
-class LcuNotRunningException : public Exception
+class Lcu_not_running_exception : public Exception
 {
 public:
-    LcuNotRunningException(const std::string& what) : Exception{what} {}
+    Lcu_not_running_exception(const std::string& what) : Exception{what} {}
 };
 
-class LcuParametersException : public Exception
+class Lcu_parameters_exception : public Exception
 {
 public:
-    LcuParametersException(const std::string& what) : Exception{what} {}
+    Lcu_parameters_exception(const std::string& what) : Exception{what} {}
 };
 
-class PathNotFoundException : public Exception
+class Path_not_found_exception : public Exception
 {
 public:
-    PathNotFoundException(const std::string& what) : Exception{what} {}
+    Path_not_found_exception(const std::string& what) : Exception{what} {}
 };
 
-class NoRegionSelectedException : public Exception
+class No_region_selected_exception : public Exception
 {
 public:
-    NoRegionSelectedException(const std::string& what) : Exception{what} {}
+    No_region_selected_exception(const std::string& what) : Exception{what} {}
 };
 
-class WrongEnumValueException : public Exception
+class Wrong_enum_value_exception : public Exception
 {
 public:
-    WrongEnumValueException(const std::string& what) : Exception{what} {}
+    Wrong_enum_value_exception(const std::string& what) : Exception{what} {}
 };
 
-class WebSocketException : public Exception
+class Websocket_exception : public Exception
 {
 public:
-    WebSocketException(const std::string& what) : Exception{what} {}
+    Websocket_exception(const std::string& what) : Exception{what} {}
 };
 
-class MessageException : public Exception
+class Message_exception : public Exception
 {
 public:
-    MessageException(const std::string& what) : Exception{what} {}
+    Message_exception(const std::string& what) : Exception{what} {}
 };
-
 
 } // namespace rito

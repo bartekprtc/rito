@@ -15,21 +15,21 @@
 
 namespace rito {
 
-class HttpsWebsocketClient
+class Https_websocket_client
 {
 public:
-    HttpsWebsocketClient(const std::string& host, std::uint16_t port = 443);
-    ~HttpsWebsocketClient();
+    Https_websocket_client(const std::string& host, std::uint16_t port = 443);
+    ~Https_websocket_client();
 
-    void setCredentials(const std::string& username, const std::string& password);
+    void set_credentials(const std::string& username, const std::string& password);
 
-    bool isConnected();
+    bool is_connected();
 
     void start();
     void stop();
 
-    bool sendMessage(std::string_view message);
-    Poco::Buffer<char> receiveMessage();
+    bool send_message(std::string_view message);
+    Poco::Buffer<char> receive_message();
 
 private:
     void run();
@@ -46,7 +46,7 @@ private:
 
     Poco::Net::HTTPRequest m_request;
     Poco::Net::HTTPResponse m_response;
-    std::unique_ptr<Poco::Net::WebSocket> m_webSocket;
+    std::unique_ptr<Poco::Net::WebSocket> m_websocket;
 };
 
 } // namespace rito
