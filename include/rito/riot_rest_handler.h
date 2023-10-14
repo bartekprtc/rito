@@ -1,5 +1,7 @@
 #pragma once
 
+#include "rito_export.h"
+
 #include "common_types.h"
 
 #include <memory>
@@ -9,7 +11,7 @@ namespace rito {
 
 class Https_rest_client;
 
-enum class Region
+enum class RITO_EXPORT Region
 {
     none,
     br,
@@ -25,7 +27,7 @@ enum class Region
     ru
 };
 
-class Riot_rest_handler
+class RITO_EXPORT Riot_rest_handler
 {
 public:
     Riot_rest_handler(const std::string& apiKey);
@@ -44,7 +46,5 @@ private:
     std::string m_api_key;
     std::unique_ptr<Https_rest_client> m_client;
 };
-
-std::string get_host_by_region(Region region);
 
 } // namespace rito

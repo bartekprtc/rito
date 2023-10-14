@@ -1,5 +1,7 @@
 #pragma once
 
+#include "rito_export.h"
+
 #include "common_types.h"
 #include "lcu_process_handler.h"
 
@@ -12,7 +14,7 @@ namespace rito {
 
 class Https_websocket_client;
 
-class Lcu_websocket_handler
+class RITO_EXPORT Lcu_websocket_handler
 {
 public:
     Lcu_websocket_handler();

@@ -1,5 +1,7 @@
 #pragma once
 
+#include "rito_export.h"
+
 #include <cstdint>
 #include <functional>
 #include <string>
@@ -21,7 +23,7 @@ using Wamp_call_error_callback =
 // Arg1: event, Arg2: data (JSON)
 using Wamp_event_callback = std::function<void(const std::string&, const std::string&)>;
 
-enum class Request_type
+enum class RITO_EXPORT Request_type
 {
     http_connect,
     http_delete,
@@ -34,7 +36,7 @@ enum class Request_type
     http_trace
 };
 
-struct Http_response
+struct RITO_EXPORT Http_response
 {
     std::int32_t status;
     std::string reason;

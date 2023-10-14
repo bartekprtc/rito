@@ -18,13 +18,20 @@ add_library(Rito
     src/lcu_process_handler_helpers.cpp
 )
 
+set(CMAKE_CXX_VISIBILITY_PRESET hidden)
+set(CMAKE_VISIBILITY_INLINES_HIDDEN YES)
+
 add_library(Rito::Rito ALIAS Rito)
 
 set_target_properties(Rito PROPERTIES
     SOVERSION ${PROJECT_VERSION_MAJOR}
     VERSION ${PROJECT_VERSION}
+
     DEBUG_POSTFIX d
 )
+
+include(GenerateExportHeader)
+generate_export_header(Rito)
 
 target_compile_features(Rito PUBLIC cxx_std_20)
 
@@ -47,7 +54,7 @@ target_include_directories(Rito PRIVATE include/rito)
 
 target_include_directories(Rito
     PUBLIC
-        $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/include>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
         $<INSTALL_INTERFACE:include>
 )
@@ -73,7 +80,10 @@ install(TARGETS Rito
     ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
 )
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/rito
-    DESTINATION include
+    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+)
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/rito_export.h
+    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/rito
 )
 
 install(EXPORT RitoTargets

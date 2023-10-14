@@ -1,12 +1,14 @@
 #pragma once
 
+#include "rito_export.h"
+
 #include <cstdint>
 #include <memory>
 #include <string>
 
 namespace rito {
 
-struct Lcu_parameters
+struct RITO_EXPORT Lcu_parameters
 {
     std::string remoting_auth_token;
     std::uint16_t app_port;
@@ -14,7 +16,7 @@ struct Lcu_parameters
 
 class Lcu_process_handler_impl;
 
-class Lcu_process_handler
+class RITO_EXPORT Lcu_process_handler
 {
 public:
     Lcu_process_handler();

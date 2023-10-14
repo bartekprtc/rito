@@ -1,5 +1,7 @@
 #pragma once
 
+#include "rito_export.h"
+
 #include "common_types.h"
 #include "lcu_websocket_handler.h"
 
@@ -16,7 +18,7 @@ using namespace std::literals::string_literals;
 template <class T>
 concept Convertible_to_string = std::convertible_to<T, std::string>;
 
-enum class Wamp_message_type
+enum class RITO_EXPORT Wamp_message_type
 {
     call = 2,
     call_result = 3,
@@ -26,7 +28,7 @@ enum class Wamp_message_type
     event = 8
 };
 
-class Lcu_wamp_handler
+class RITO_EXPORT Lcu_wamp_handler
 {
 public:
     Lcu_wamp_handler();
