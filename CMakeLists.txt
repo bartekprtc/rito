@@ -7,7 +7,7 @@ project(Rito
 
 find_package(Poco REQUIRED COMPONENTS Net JSON Foundation NetSSL)
 
-add_library(rito
+add_library(Rito
     src/https_rest_client.cpp
     src/https_websocket_client.cpp
     src/riot_rest_handler.cpp
@@ -18,41 +18,41 @@ add_library(rito
     src/lcu_process_handler_helpers.cpp
 )
 
-add_library(rito::rito ALIAS rito)
+add_library(Rito::Rito ALIAS Rito)
 
-set_target_properties(rito PROPERTIES
+set_target_properties(Rito PROPERTIES
     SOVERSION ${PROJECT_VERSION_MAJOR}
     VERSION ${PROJECT_VERSION}
     DEBUG_POSTFIX d
 )
 
-target_compile_features(rito PUBLIC cxx_std_20)
+target_compile_features(Rito PUBLIC cxx_std_20)
 
 if (LINUX)
-    target_include_directories(rito PRIVATE src/platform/linux/include)
-    target_sources(rito PRIVATE
+    target_include_directories(Rito PRIVATE src/platform/linux/include)
+    target_sources(Rito PRIVATE
         src/platform/linux/lcu_process_handler_impl_linux.cpp
     )
 elseif (WIN32)
-    target_include_directories(rito PRIVATE src/platform/windows/include)
-    target_sources(rito PRIVATE
+    target_include_directories(Rito PRIVATE src/platform/windows/include)
+    target_sources(Rito PRIVATE
         src/platform/windows/lcu_process_handler_impl_windows.cpp
     )
 endif()
 
-target_include_directories(rito PRIVATE src/include)
+target_include_directories(Rito PRIVATE src/include)
 
 # Public headers visible internally without rito/ prefix
-target_include_directories(rito PRIVATE include/rito)
+target_include_directories(Rito PRIVATE include/rito)
 
-target_include_directories(rito
+target_include_directories(Rito
     PUBLIC
         $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/include>
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
         $<INSTALL_INTERFACE:include>
 )
 
-target_link_libraries(rito PRIVATE
+target_link_libraries(Rito PRIVATE
     Poco::Net
     Poco::JSON
     Poco::Foundation
@@ -60,49 +60,49 @@ target_link_libraries(rito PRIVATE
 )
 
 include(GNUInstallDirs)
-set(rito_INSTALL_CMAKEDIR
+set(Rito_INSTALL_CMAKEDIR
     ${CMAKE_INSTALL_LIBDIR}/cmake/rito
-    CACHE STRING "Path to rito cmake files"
+    CACHE STRING "Path to Rito cmake files"
 )
-install(TARGETS rito
-    EXPORT ritoTargets
+install(TARGETS Rito
+    EXPORT RitoTargets
 
     INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-        COMPONENT rito_Runtime
+        COMPONENT Rito_Runtime
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-        COMPONENT rito_Runtime
-        NAMELINK_COMPONENT rito_Development
+        COMPONENT Rito_Runtime
+        NAMELINK_COMPONENT Rito_Development
     ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-        COMPONENT rito_Development
+        COMPONENT Rito_Development
 )
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/rito
     DESTINATION include
 )
 
-install(EXPORT ritoTargets
-    FILE ritoTargets.cmake
-    NAMESPACE rito::
-    DESTINATION ${rito_INSTALL_CMAKEDIR}
-    COMPONENT rito_Development
+install(EXPORT RitoTargets
+    FILE RitoTargets.cmake
+    NAMESPACE Rito::
+    DESTINATION ${Rito_INSTALL_CMAKEDIR}
+    COMPONENT Rito_Development
 )
 
 include(CMakePackageConfigHelpers)
 configure_package_config_file(
-    ${CMAKE_CURRENT_SOURCE_DIR}/ritoConfig.cmake.in
-    ${CMAKE_CURRENT_BINARY_DIR}/ritoConfig.cmake
+    ${CMAKE_CURRENT_SOURCE_DIR}/RitoConfig.cmake.in
+    ${CMAKE_CURRENT_BINARY_DIR}/RitoConfig.cmake
     INSTALL_DESTINATION
-        ${rito_INSTALL_CMAKEDIR}
+        ${Rito_INSTALL_CMAKEDIR}
 )
 
-write_basic_package_version_file(ritoConfigVersion.cmake
-    VERSION ${rito_VERSION}
+write_basic_package_version_file(RitoConfigVersion.cmake
+    VERSION ${Rito_VERSION}
     COMPATIBILITY SameMajorVersion
 )
 install(FILES
-    ${CMAKE_CURRENT_BINARY_DIR}/ritoConfig.cmake
-    ${CMAKE_CURRENT_BINARY_DIR}/ritoConfigVersion.cmake
-    DESTINATION ${rito_INSTALL_CMAKEDIR}
+    ${CMAKE_CURRENT_BINARY_DIR}/RitoConfig.cmake
+    ${CMAKE_CURRENT_BINARY_DIR}/RitoConfigVersion.cmake
+    DESTINATION ${Rito_INSTALL_CMAKEDIR}
 )
 
 include (CPack)
