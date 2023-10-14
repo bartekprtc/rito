@@ -1,236 +1,200 @@
-#include "lcuProcessHandlerImpl.h"
+#include "lcu_process_handler_impl.h"
 
 #include "exception.h"
+#include "lcu_process_handler_helpers.h"
 
 #include "Poco/UnicodeConverter.h"
 
 #include <libloaderapi.h>
 #include <psapi.h>
 
-#include <iostream>
 #include <format>
 #include <functional>
+#include <iostream>
 #include <regex>
 
 namespace rito {
 
-    using namespace Poco;
+using namespace Poco;
 
 namespace {
-constexpr auto MAX_PROCESS_COUNT{65536};
+constexpr auto max_process_count{65536};
 }
 
-std::string extractRemotingAuthToken(const std::string& lcuCommand);
-std::string extractAppPort(const std::string& lcuCommand);
-bool isInteger(std::string_view str);
-
-LcuProcessHandlerImpl::LcuProcessHandlerImpl()
-  : m_dllLib{nullptr}, m_ntQueryInformationProcessPtr{nullptr}
+Lcu_process_handler_impl::Lcu_process_handler_impl()
+  : m_dll_lib{nullptr}, m_nt_query_information_process_ptr{nullptr}
 {
 }
 
-LcuProcessHandlerImpl::~LcuProcessHandlerImpl()
+Lcu_process_handler_impl::~Lcu_process_handler_impl()
 {
-    unloadNtDll();
+    unload_nt_dll();
 }
 
-LcuParameters LcuProcessHandlerImpl::getLcuProcessParameters()
+Lcu_parameters Lcu_process_handler_impl::get_lcu_process_parameters()
 {
-    std::wstring wideLcuCommand{getLcuProcessCommand()};
-    std::string lcuCommand;
-    UnicodeConverter::convert(wideLcuCommand, lcuCommand);
+    std::string lcu_command{get_lcu_process_command()};
 
-    std::string remotingAuthToken{extractRemotingAuthToken(lcuCommand)};
-    std::string appPort{extractAppPort(lcuCommand)};
+    std::string remoting_auth_token{extract_remoting_auth_token(lcu_command)};
+    std::string app_port{extract_app_port(lcu_command)};
 
-    return {remotingAuthToken, static_cast<uint16_t>(std::stoi(appPort))};
+    return {remoting_auth_token, static_cast<uint16_t>(std::stoi(app_port))};
 }
 
-void LcuProcessHandlerImpl::loadNtDll()
+void Lcu_process_handler_impl::load_nt_dll()
 {
-    if (m_dllLib)
+    if (m_dll_lib)
     {
         return;
     }
 
-    m_dllLib = LoadLibrary(TEXT("Ntdll.dll"));
+    m_dll_lib = LoadLibrary(TEXT("Ntdll.dll"));
 
-    if (!m_dllLib)
+    if (!m_dll_lib)
     {
-        throw LcuParametersException{"Unable to dynamically load Ntdll.dll"};
+        throw Lcu_parameters_exception{"Unable to dynamically load Ntdll.dll"};
     }
 }
 
-void LcuProcessHandlerImpl::retrieveNtQueryInformationProcessFunctionPointer()
+void Lcu_process_handler_impl::retrieve_nt_query_information_process_function_pointer()
 {
-    if (m_ntQueryInformationProcessPtr)
+    if (m_nt_query_information_process_ptr)
     {
         return;
     }
-    m_ntQueryInformationProcessPtr = reinterpret_cast<NtQueryInformationProcessPtr>(GetProcAddress(m_dllLib, "NtQueryInformationProcess"));
+    m_nt_query_information_process_ptr = reinterpret_cast<nt_query_information_process_ptr>(
+      GetProcAddress(m_dll_lib, "NtQueryInformationProcess"));
 
-    if (!m_ntQueryInformationProcessPtr)
+    if (!m_nt_query_information_process_ptr)
     {
-        throw LcuParametersException{
+        throw Lcu_parameters_exception{
           "Unable to retrieve NtQueryInformationProcess function pointer from Ntdll.dll"};
     }
 }
 
-void LcuProcessHandlerImpl::unloadNtDll()
+void Lcu_process_handler_impl::unload_nt_dll()
 {
-    if (!m_dllLib)
+    if (!m_dll_lib)
     {
         return;
     }
 
-    FreeLibrary(m_dllLib);
-    m_dllLib = nullptr;
-    m_ntQueryInformationProcessPtr = nullptr;
+    FreeLibrary(m_dll_lib);
+    m_dll_lib = nullptr;
+    m_nt_query_information_process_ptr = nullptr;
 }
 
-std::wstring LcuProcessHandlerImpl::getLcuProcessCommand()
+std::string Lcu_process_handler_impl::get_lcu_process_command()
 {
-    std::vector<DWORD> processes(MAX_PROCESS_COUNT); // Vector handles memory cleanup
-    DWORD bytesReturned{};
+    std::vector<DWORD> processes(max_process_count); // Vector handles memory cleanup
+    DWORD bytes_returned{};
 
-    if (!EnumProcesses(processes.data(), sizeof(DWORD) * MAX_PROCESS_COUNT, &bytesReturned))
+    if (!EnumProcesses(processes.data(), sizeof(DWORD) * max_process_count, &bytes_returned))
     {
-        throw LcuParametersException{
-          "Unable to to enumerate processes with EnumProcesses"};
+        throw Lcu_parameters_exception{"Unable to to enumerate processes with EnumProcesses"};
     }
 
-    DWORD processCount{bytesReturned / sizeof(DWORD)};
-    for (auto i{0}; i < processCount; i++)
+    DWORD process_count{bytes_returned / sizeof(DWORD)};
+    for (auto i{0}; i < process_count; i++)
     {
         if (processes[i])
         {
-            HANDLE processHandle{
+            HANDLE process_handle{
               OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, FALSE, processes[i])};
 
-            auto processName{extractProcessName(processHandle)};
-            if (processName == L"LeagueClientUx.exe")
+            auto process_name{extract_process_name(process_handle)};
+            if (process_name == "LeagueClientUx.exe")
             {
-                std::wstring processCommand;
+                std::string process_command;
                 try
                 {
-                    processCommand = extractProcessCommand(processHandle);
+                    process_command = extract_process_command(process_handle);
                 }
                 catch (...)
                 {
-                    CloseHandle(processHandle);
+                    CloseHandle(process_handle);
                     throw;
                 }
 
-                CloseHandle(processHandle);
-                return processCommand;
+                CloseHandle(process_handle);
+                return process_command;
             }
 
-            CloseHandle(processHandle);
+            CloseHandle(process_handle);
         }
     }
 
-     throw LcuParametersException{"Unable to find League Client process"};
-    }
-
-std::wstring LcuProcessHandlerImpl::extractProcessName(HANDLE processHandle)
-{
-    TCHAR processName[MAX_PATH]{};
-    if (processHandle)
-    {
-        HMODULE processModuleHandle;
-        DWORD bytesReturnedModule{};
-
-        if (EnumProcessModules(processHandle,
-                               &processModuleHandle,
-                               sizeof(processModuleHandle),
-                               &bytesReturnedModule))
-        {
-            GetModuleBaseName(
-              processHandle, processModuleHandle, processName, sizeof(processName) / sizeof(TCHAR));
-        }
-    }
-
-    return std::wstring{processName};
+    throw Lcu_parameters_exception{"Unable to find League Client process"};
 }
 
-std::wstring LcuProcessHandlerImpl::extractProcessCommand(HANDLE processHandle)
+std::string Lcu_process_handler_impl::extract_process_name(HANDLE process_handle)
 {
-    loadNtDll();
-    retrieveNtQueryInformationProcessFunctionPointer();
+    TCHAR process_name[MAX_PATH]{};
+    if (process_handle)
+    {
+        HMODULE process_module_handle;
+        DWORD module_bytes_returned{};
 
-    // HANDLE heap{GetProcessHeap()};
-    // PVOID processInfo{HeapAlloc(heap, HEAP_ZERO_MEMORY, sizeof(PROCESS_BASIC_INFORMATION))};
-    PVOID processInfo{operator new(sizeof(PROCESS_BASIC_INFORMATION))};
+        if (EnumProcessModules(process_handle,
+                               &process_module_handle,
+                               sizeof(process_module_handle),
+                               &module_bytes_returned))
+        {
+            GetModuleBaseName(process_handle,
+                              process_module_handle,
+                              process_name,
+                              sizeof(process_name) / sizeof(TCHAR));
+        }
+    }
 
-    LONG status{m_ntQueryInformationProcessPtr(processHandle,
-                                               PROCESSINFOCLASS::ProcessBasicInformation,
-                                               processInfo,
-                                               sizeof(PROCESS_BASIC_INFORMATION),
-                                               nullptr)};
-    PPEB peb{reinterpret_cast<PPEB>((reinterpret_cast<PVOID*>(processInfo))[1])};
-    PPEB pebBuffer{new PEB};
-    BOOL result{ReadProcessMemory(processHandle, peb, pebBuffer, sizeof(PEB), nullptr)};
+    std::string process_name_converted;
+    UnicodeConverter::convert(process_name, process_name_converted);
 
-    PRTL_USER_PROCESS_PARAMETERS processParameters{pebBuffer->ProcessParameters};
-    // PRTL_USER_PROCESS_PARAMETERS pRtlProcParamCopy =
-    //    (PRTL_USER_PROCESS_PARAMETERS)malloc(sizeof(RTL_USER_PROCESS_PARAMETERS));
-    PRTL_USER_PROCESS_PARAMETERS processParametersBuffer{new RTL_USER_PROCESS_PARAMETERS};
-    result = ReadProcessMemory(processHandle,
-                               processParameters,
-                               processParametersBuffer,
+    return process_name_converted;
+}
+
+std::string Lcu_process_handler_impl::extract_process_command(HANDLE process_handle)
+{
+    load_nt_dll();
+    retrieve_nt_query_information_process_function_pointer();
+
+    PVOID process_info{operator new(sizeof(PROCESS_BASIC_INFORMATION))};
+
+    LONG status{m_nt_query_information_process_ptr(process_handle,
+                                                   PROCESSINFOCLASS::ProcessBasicInformation,
+                                                   process_info,
+                                                   sizeof(PROCESS_BASIC_INFORMATION),
+                                                   nullptr)};
+    PPEB peb{reinterpret_cast<PPEB>((reinterpret_cast<PVOID*>(process_info))[1])};
+    PPEB peb_buffer{new PEB};
+    BOOL result{ReadProcessMemory(process_handle, peb, peb_buffer, sizeof(PEB), nullptr)};
+
+    PRTL_USER_PROCESS_PARAMETERS process_parameters{peb_buffer->ProcessParameters};
+    PRTL_USER_PROCESS_PARAMETERS process_parameters_buffer{new RTL_USER_PROCESS_PARAMETERS};
+    result = ReadProcessMemory(process_handle,
+                               process_parameters,
+                               process_parameters_buffer,
                                sizeof(RTL_USER_PROCESS_PARAMETERS),
                                nullptr);
-    PWSTR command{processParametersBuffer->CommandLine.Buffer};
-    USHORT commandLength{processParametersBuffer->CommandLine.Length};
-    PWSTR commandBuffer{new WCHAR[commandLength]};
-    result = ReadProcessMemory(processHandle,
+    PWSTR command{process_parameters_buffer->CommandLine.Buffer};
+    USHORT command_length{process_parameters_buffer->CommandLine.Length};
+    PWSTR command_buffer{new WCHAR[command_length]};
+    result = ReadProcessMemory(process_handle,
                                command,
-                               commandBuffer, // command line goes here
-                               commandLength,
-                                nullptr);
+                               command_buffer, // command line goes here
+                               command_length,
+                               nullptr);
 
-    std::wstring ws(commandBuffer);
+    std::string to;
+    UnicodeConverter::convert(command, to);
+    //std::wstring command(command_buffer);
 
-    delete[] commandBuffer;
-    delete processParametersBuffer;
-    delete pebBuffer;
-    delete processInfo;
+    delete[] command_buffer;
+    delete process_parameters_buffer;
+    delete peb_buffer;
+    delete process_info;
 
-    return ws;
+    return to;
 }
 
-
-std::string extractRemotingAuthToken(const std::string& lcuCommand)
-{
-    std::regex tokenRegex{"--remoting-auth-token=([a-zA-Z0-9-_]+)"};
-    std::smatch tokenMatch;
-    if (std::regex_search(lcuCommand, tokenMatch, tokenRegex))
-    {
-        return tokenMatch[1];
-    }
-
-    throw LcuParametersException(
-        "Unable to extract remoting auth token from League Client launch command");
-}
-
-std::string extractAppPort(const std::string& lcuCommand)
-{
-    std::regex portRegex{"--app-port=(\\d+)"};
-    std::smatch portMatch;
-    if (std::regex_search(lcuCommand, portMatch, portRegex))
-    {
-        return portMatch[1];
-    }
-
-    throw LcuParametersException(
-      "Unable to extract app port from League Client launch command");
-}
-
-bool isInteger(std::string_view str)
-{
-    return !str.empty() && std::all_of(str.cbegin(), str.cend(), [](char ch) {
-        return std::isdigit(ch);
-    });
-}
-
-}
+} // namespace rito

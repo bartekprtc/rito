@@ -69,12 +69,8 @@ install(TARGETS Rito
 
     INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-        COMPONENT Rito_Runtime
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-        COMPONENT Rito_Runtime
-        NAMELINK_COMPONENT Rito_Development
     ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-        COMPONENT Rito_Development
 )
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/rito
     DESTINATION include
@@ -84,7 +80,6 @@ install(EXPORT RitoTargets
     FILE RitoTargets.cmake
     NAMESPACE Rito::
     DESTINATION ${Rito_INSTALL_CMAKEDIR}
-    COMPONENT Rito_Development
 )
 
 include(CMakePackageConfigHelpers)
