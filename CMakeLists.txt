@@ -74,7 +74,6 @@ install(TARGETS rito
         NAMELINK_COMPONENT rito_Development
     ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
         COMPONENT rito_Development
-    PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
 )
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/rito
     DESTINATION include
@@ -104,3 +103,5 @@ install(FILES
     ${CMAKE_CURRENT_BINARY_DIR}/ritoConfigVersion.cmake
     DESTINATION ${rito_INSTALL_CMAKEDIR}
 )
+
+include (CPack)
