@@ -23,6 +23,7 @@ add_library(rito::rito ALIAS rito)
 set_target_properties(rito PROPERTIES
     SOVERSION ${PROJECT_VERSION_MAJOR}
     VERSION ${PROJECT_VERSION}
+    DEBUG_POSTFIX d
 )
 
 target_compile_features(rito PUBLIC cxx_std_20)
