@@ -9,7 +9,7 @@
 #include <Poco/Net/WebSocket.h>
 
 #include <cstdint>
-#include <stdexcept>
+#include <memory>
 #include <string>
 #include <string_view>
 

@@ -65,8 +65,8 @@ jobs:
             -S ${{ github.workspace }}
             -B ${{ steps.strings.outputs.build-output-dir }}
             -D CMAKE_BUILD_TYPE=${{ matrix.build_type }}
-            -D CMAKE_CXX_COMPILES=${{ matrix.cpp_compiler }}
-            -D CMAKE_C_COMPILES=${{ matrix.c_compiler }}
+            -D CMAKE_CXX_COMPILER=${{ matrix.cpp_compiler }}
+            -D CMAKE_C_COMPILER=${{ matrix.c_compiler }}
             -G Ninja
             -D CMAKE_MAKE_PROGRAM=${ninja_program}
           RESULT_VARIABLE result
