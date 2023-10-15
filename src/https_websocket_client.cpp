@@ -2,6 +2,7 @@
 
 #include "exception.h"
 
+#include <Poco/Exception.h>
 #include <Poco/Net/HTTPMessage.h>
 #include <Poco/Net/NetException.h>
 #include <Poco/Net/WebSocket.h>
@@ -129,6 +130,17 @@ Poco::Buffer<char> Https_websocket_client::receive_message()
             }
 
             return message_buffer;
+        }
+        catch (Poco::TimeoutException& e)
+        {
+        }
+        catch (Websocket_exception& e)
+        {
+            throw;
+        }
+        catch (Message_exception& e)
+        {
+            throw;
         }
         catch (std::exception& e)
         {
