@@ -1,0 +1,57 @@
+name: CMake - build (linux, gcc-13, release)
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Install GCC 13
+      shell: bash
+      run: |
+        sudo add-apt-repository ppa:ubuntu-toolchain-r/test
+        sudo apt install gcc-13 g++-13
+        sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-13 100 --slave /usr/bin/g++ g++ /usr/bin/g++-13 --slave /usr/bin/gcov gcov /usr/bin/gcov-13
+        sudo update-alternatives --set gcc /usr/bin/gcc-13
+
+    - name: Download Ninja
+      shell: cmake -P {0}
+      run: |
+        set(ninja_version "1.11.1")
+
+        set(ninja_url "https://github.com/ninja-build/ninja/releases/download/v${ninja_version}/ninja-linux.zip")
+        file(DOWNLOAD "${ninja_url}" ./ninja.zip SHOW_PROGRESS)
+        execute_process(COMMAND ${CMAKE_COMMAND} -E tar xf ./ninja.zip)
+        execute_process(COMMAND chmod +x ninja)
+
+    - name: Install dependencies (Poco)
+      shell: bash
+      run: sudo apt install libpoco-dev
+
+    - name: Configure CMake
+      shell: cmake -P {0}
+      run: |
+        file(TO_CMAKE_PATH "$ENV{GITHUB_WORKSPACE}/ninja" ninja_program)
+        execute_process(
+          COMMAND cmake
+            -S ${{ github.workspace }}
+            -B build
+            -D CMAKE_BUILD_TYPE=Release
+            -D CMAKE_CXX_COMPILER=g++
+            -G Ninja
+            -D CMAKE_MAKE_PROGRAM=${ninja_program}
+          RESULT_VARIABLE result
+        )
+        if (NOT result EQUAL 0)
+          message(FATAL_ERROR "Failed to build project")
+        endif()
+
+    - name: Build
+      run: cmake --build build
