@@ -1,11 +1,25 @@
 cmake_minimum_required(VERSION 3.23)
 
+option(BUILD_SHARED_LIBS "Build shared library" ON)
+
+if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
+    message(STATUS "Setting build type to Release as none was specified")
+    set(CMAKE_BUILD_TYPE Release)
+endif()
+
 project(Rito
     VERSION 0.1.0
     LANGUAGES CXX
 )
 
-find_package(Poco REQUIRED COMPONENTS Net JSON Foundation NetSSL)
+find_package(Poco
+    REQUIRED
+    COMPONENTS
+        Net
+        JSON
+        Foundation
+        NetSSL
+)
 
 add_library(Rito
     src/https_rest_client.cpp
@@ -23,11 +37,12 @@ set(CMAKE_VISIBILITY_INLINES_HIDDEN YES)
 
 add_library(Rito::Rito ALIAS Rito)
 
-set_target_properties(Rito PROPERTIES
-    SOVERSION ${PROJECT_VERSION_MAJOR}
-    VERSION ${PROJECT_VERSION}
+set_target_properties(Rito
+    PROPERTIES
+        SOVERSION ${PROJECT_VERSION_MAJOR}
+        VERSION ${PROJECT_VERSION}
 
-    DEBUG_POSTFIX d
+        DEBUG_POSTFIX d
 )
 
 include(GenerateExportHeader)
@@ -36,52 +51,67 @@ generate_export_header(Rito)
 target_compile_features(Rito PUBLIC cxx_std_20)
 
 if (LINUX)
-    target_include_directories(Rito PRIVATE src/platform/linux/include)
-    target_sources(Rito PRIVATE
-        src/platform/linux/lcu_process_handler_impl_linux.cpp
+    target_include_directories(Rito
+        PRIVATE
+            src/platform/linux/include
+    )
+    target_sources(Rito
+        PRIVATE
+            src/platform/linux/lcu_process_handler_impl_linux.cpp
     )
 elseif (WIN32)
-    target_include_directories(Rito PRIVATE src/platform/windows/include)
-    target_sources(Rito PRIVATE
-        src/platform/windows/lcu_process_handler_impl_windows.cpp
+    target_include_directories(Rito o
+        PRIVATE
+            src/platform/windows/include
+    )
+    target_sources(Rito
+        PRIVATE
+            src/platform/windows/lcu_process_handler_impl_windows.cpp
     )
 endif()
 
-target_include_directories(Rito PRIVATE src/include)
-
-# Public headers visible internally without rito/ prefix
-target_include_directories(Rito PRIVATE include/rito)
-
 target_include_directories(Rito
+    PRIVATE
+        src/include  # Internal headers
+        include/rito # Public headers visible internally without rito/ prefix
     PUBLIC
         $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
         $<INSTALL_INTERFACE:include>
 )
 
-target_link_libraries(Rito PRIVATE
-    Poco::Net
-    Poco::JSON
-    Poco::Foundation
-    Poco::NetSSL
+target_link_libraries(Rito
+    PRIVATE
+        Poco::Net
+        Poco::JSON
+        Poco::Foundation
+        Poco::NetSSL
 )
 
 include(GNUInstallDirs)
+
 set(Rito_INSTALL_CMAKEDIR
     ${CMAKE_INSTALL_LIBDIR}/cmake/rito
     CACHE STRING "Path to Rito cmake files"
 )
+
 install(TARGETS Rito
     EXPORT RitoTargets
 
-    INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
-    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    INCLUDES
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+    RUNTIME
+        DESTINATION ${CMAKE_INSTALL_BINDIR}
+    LIBRARY
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    ARCHIVE
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}
 )
+
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/rito
     DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
 )
+
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/rito_export.h
     DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/rito
 )
@@ -93,6 +123,7 @@ install(EXPORT RitoTargets
 )
 
 include(CMakePackageConfigHelpers)
+
 configure_package_config_file(
     ${CMAKE_CURRENT_SOURCE_DIR}/RitoConfig.cmake.in
     ${CMAKE_CURRENT_BINARY_DIR}/RitoConfig.cmake
@@ -104,6 +135,7 @@ write_basic_package_version_file(RitoConfigVersion.cmake
     VERSION ${Rito_VERSION}
     COMPATIBILITY SameMajorVersion
 )
+
 install(FILES
     ${CMAKE_CURRENT_BINARY_DIR}/RitoConfig.cmake
     ${CMAKE_CURRENT_BINARY_DIR}/RitoConfigVersion.cmake

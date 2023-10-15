@@ -1,6 +1,13 @@
 @PACKAGE_INIT@
 
 include(CMakeFindDependencyMacro)
-find_dependency(Poco REQUIRED COMPONENTS Net JSON Foundation NetSSL)
+find_dependency(Poco
+    REQUIRED
+    COMPONENTS
+        Net
+        JSON
+        Foundation
+        NetSSL
+)
 
 include("${CMAKE_CURRENT_LIST_DIR}/ritoTargets.cmake")
