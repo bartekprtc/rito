@@ -1,4 +1,4 @@
-name: Windows (windows-latest) - cl (msvc) - build (debug, release), tests, install
+name: Windows (windows-latest) - cl (msvc) - vcpkg, build (debug, release), tests, install
 
 on:
   push:
@@ -23,16 +23,16 @@ jobs:
       shell: pwsh
       run: .\tools\vcpkg\vcpkg.exe install poco[netssl] gtest
 
-    - name: Configure CMake for Debug build
+    - name: Configure CMake
       shell: cmake -P {0}
       run: |
         execute_process(
           COMMAND cmake
-            -S ${{ github.workspace }}
+            -S .
             -B build
             -D CMAKE_CXX_COMPILER=cl
-            --toolchain .\tools\vcpkg\scripts\buildsystems\vcpkg.cmake
-            -D CMAKE_INSTALL_PREFIX=.\build\install
+            --toolchain ./tools/vcpkg/scripts/buildsystems/vcpkg.cmake
+            -D CMAKE_INSTALL_PREFIX=./build/install
             -D BUILD_TESTING=ON
           RESULT_VARIABLE result
         )
@@ -49,9 +49,10 @@ jobs:
     - name: Install
       run: cmake --build build --config Debug -t install
 
-    - name: Remove build folder before Release build
+    - name: Remove install artifacts
       shell: pwsh
-      run: Remove-Item .\build\ -Recurse -Force
+      run: |
+        Remove-Item .\build\install\ -Recurse -Force
 
     - name: Build Release
       run: cmake --build build --config Release
