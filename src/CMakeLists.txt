@@ -46,7 +46,7 @@ if (LINUX)
             platform/linux/lcu_process_handler_impl_linux.cpp
     )
 elseif (WIN32)
-    target_include_directories(Rito o
+    target_include_directories(Rito
         PRIVATE
             platform/windows/include
     )
