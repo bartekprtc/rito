@@ -12,7 +12,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-      submodules: false
+      with:
+        submodules: false
 
     - name: Install GCC 13, ninja, dependencies (Poco + GTest)
       shell: bash
