@@ -21,7 +21,7 @@ namespace {
 constexpr auto max_process_count{65536};
 }
 
-Lcu_process_handler_impl::Lcu_process_handler_impl()
+Lcu_process_handler_impl::Lcu_process_handler_impl(std::filesystem::path dir_path)
   : m_dll_lib{nullptr}, m_nt_query_information_process_ptr{nullptr}
 {
 }

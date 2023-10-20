@@ -3,11 +3,17 @@
 #include "exception.h"
 #include "lcu_process_handler_helpers.h"
 
+#include <format>
 #include <cctype>
 #include <filesystem>
 #include <fstream>
 
 namespace rito {
+
+Lcu_process_handler_impl::Lcu_process_handler_impl(std::filesystem::path proc_dir)
+  : m_proc_dir{proc_dir}
+{
+}
 
 Lcu_parameters Lcu_process_handler_impl::get_lcu_process_parameters()
 {
@@ -23,8 +29,7 @@ std::string Lcu_process_handler_impl::get_lcu_process_command()
 {
     try
     {
-        std::filesystem::path proc_dir("/proc");
-        for (const auto& dir : std::filesystem::directory_iterator(proc_dir))
+        for (const auto& dir : std::filesystem::directory_iterator(m_proc_dir))
         {
             std::string_view proc_id{dir.path().stem().c_str()};
             if (!is_integer(proc_id))
@@ -43,7 +48,7 @@ std::string Lcu_process_handler_impl::get_lcu_process_command()
     }
     catch (std::filesystem::filesystem_error& e)
     {
-        throw Path_not_found_exception{"Unable to locate /proc folder"};
+        throw Path_not_found_exception{std::format("Unable to locate {} folder", m_proc_dir.string())};
     }
 
     throw Lcu_not_running_exception("Unable to find League Client process");

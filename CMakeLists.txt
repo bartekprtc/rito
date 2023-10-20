@@ -13,11 +13,13 @@ project(Rito
     LANGUAGES CXX
 )
 
+add_subdirectory(src)
+
 include(CTest)
 if(BUILD_TESTING)
     find_package(GTest REQUIRED)
+    add_subdirectory(test)
 endif()
 
-add_subdirectory(src)
 
 include (CPack)

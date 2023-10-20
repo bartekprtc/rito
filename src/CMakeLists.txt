@@ -127,7 +127,3 @@ install(FILES
     ${CMAKE_CURRENT_BINARY_DIR}/RitoConfigVersion.cmake
     DESTINATION ${Rito_INSTALL_CMAKEDIR}
 )
-
-if(BUILD_TESTING)
-    add_subdirectory(unittest)
-endif()

@@ -5,6 +5,7 @@
 #include <windows.h>
 #include <winternl.h>
 
+#include <filesystem>
 #include <string>
 
 typedef NTSTATUS(NTAPI* nt_query_information_process_ptr)(
@@ -20,7 +21,7 @@ namespace rito {
 class Lcu_process_handler_impl
 {
 public:
-    Lcu_process_handler_impl();
+    Lcu_process_handler_impl(std::filesystem::path proc_dir);
     ~Lcu_process_handler_impl();
 
     Lcu_parameters get_lcu_process_parameters();

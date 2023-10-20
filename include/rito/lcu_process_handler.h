@@ -3,6 +3,7 @@
 #include "rito_export.h"
 
 #include <cstdint>
+#include <filesystem>
 #include <memory>
 #include <string>
 
@@ -19,7 +20,7 @@ class Lcu_process_handler_impl;
 class RITO_EXPORT Lcu_process_handler
 {
 public:
-    Lcu_process_handler();
+    Lcu_process_handler(std::filesystem::path proc_dir = "/proc");
     ~Lcu_process_handler();
     Lcu_parameters get_lcu_process_parameters();
 
