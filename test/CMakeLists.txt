@@ -3,12 +3,12 @@ add_executable(Rito-test
 )
 
 if (LINUX)
-    target_sources(Rito
+    target_sources(Rito-test
         PRIVATE
             test_lcu_process_handler_linux.cpp
     )
 elseif (WIN32)
-    target_sources(Rito
+    target_sources(Rito-test
         PRIVATE
     )
 endif()
