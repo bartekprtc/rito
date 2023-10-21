@@ -1,4 +1,4 @@
-name: Linux (ubuntu-latest) - gcc-13 - build (debug, release), tests, install
+name: Linux (ubuntu-latest) - gcc-13 - build (debug, release), tests, coverage, install
 
 on:
   push:
@@ -15,11 +15,11 @@ jobs:
       with:
         submodules: false
 
-    - name: Install GCC 13, ninja, dependencies (Poco + GTest)
+    - name: Install GCC 13, ninja, lcov, dependencies (Poco + GTest)
       shell: bash
       run: |
         sudo add-apt-repository ppa:ubuntu-toolchain-r/test
-        sudo apt install gcc-13 g++-13 ninja-build libpoco-dev libgtest-dev
+        sudo apt install gcc-13 g++-13 ninja-build lcov libpoco-dev libgtest-dev
         sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-13 100 --slave /usr/bin/g++ g++ /usr/bin/g++-13 --slave /usr/bin/gcov gcov /usr/bin/gcov-13
         sudo update-alternatives --set gcc /usr/bin/gcc-13
 
@@ -48,6 +48,19 @@ jobs:
     - name: Run tests
       shell: bash
       run: ctest -VV --test-dir build
+
+    - name: Build coverage
+      shell: bash
+      run: cmake --build build -t Rito-coverage
+
+    - name: Check coverage
+      uses: zgosalvez/github-actions-report-lcov@v3
+      with:
+        coverage-files: build/*.info
+        minimum-coverage: 10
+        artifact-name: rito-gcc-coverage-report
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        update-comment: true
 
     - name: Install
       shell: bash
