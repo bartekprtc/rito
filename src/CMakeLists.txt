@@ -111,7 +111,7 @@ install(EXPORT RitoTargets
 include(CMakePackageConfigHelpers)
 
 configure_package_config_file(
-    ${Rito_SOURCE_DIR}/RitoConfig.cmake.in
+    ${Rito_SOURCE_DIR}/cmake/RitoConfig.cmake.in
     ${CMAKE_CURRENT_BINARY_DIR}/RitoConfig.cmake
     INSTALL_DESTINATION
         ${Rito_INSTALL_CMAKEDIR}

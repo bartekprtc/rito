@@ -13,8 +13,6 @@ elseif (WIN32)
     )
 endif()
 
-
-
 target_link_libraries(Rito-test
     PRIVATE
         Rito
