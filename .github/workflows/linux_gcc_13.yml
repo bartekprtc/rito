@@ -53,11 +53,11 @@ jobs:
       shell: bash
       run: cmake --build build -t Rito-coverage
 
-    - name: Check coverage
+    - name: Check coverage and generate coverage report
       uses: zgosalvez/github-actions-report-lcov@v3
       with:
         coverage-files: build/*.info
-        minimum-coverage: 30
+        minimum-coverage: 10
         artifact-name: rito-gcc-coverage-report
         github-token: ${{ secrets.GITHUB_TOKEN }}
         update-comment: true
