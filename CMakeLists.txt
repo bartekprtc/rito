@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.23)
+cmake_minimum_required(VERSION 3.25)
 
 option(BUILD_SHARED_LIBS "Build shared library" ON)
 option(BUILD_TESTING "Build unit and block tests" OFF)
