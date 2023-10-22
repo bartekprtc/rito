@@ -7,7 +7,7 @@ namespace rito {
 
 std::string extract_remoting_auth_token(const std::string& lcu_command)
 {
-    std::regex token_regex{"--remoting-auth-token=([a-zA-Z0-9-_]+)"};
+    std::regex token_regex{"--remoting-auth-token=([a-zA-Z0-9-_]+)\\s"};
     std::smatch token_match;
     if (std::regex_search(lcu_command, token_match, token_regex))
     {
@@ -20,7 +20,7 @@ std::string extract_remoting_auth_token(const std::string& lcu_command)
 
 std::string extract_app_port(const std::string& lcu_command)
 {
-    std::regex port_regex{"--app-port=(\\d+)"};
+    std::regex port_regex{"--app-port=(\\d+)\\s"};
     std::smatch port_match;
     if (std::regex_search(lcu_command, port_match, port_regex))
     {
