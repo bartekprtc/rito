@@ -1,4 +1,4 @@
-name: Linux (ubuntu-latest) - gcc-13 - build (debug, release), tests, coverage, install
+name: linux build
 
 on:
   push:

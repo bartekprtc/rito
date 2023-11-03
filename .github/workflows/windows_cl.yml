@@ -1,4 +1,4 @@
-name: Windows (windows-latest) - cl (msvc) - vcpkg, build (debug, release), tests, install
+name: windows build
 
 on:
   push:
