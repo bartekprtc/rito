@@ -19,6 +19,34 @@ You want to:
 Details in [Docs](https://github.com/bartekprtc/rito/wiki/Docs) wiki page.
 
 ## Build
+
+### Quickstart
+
+You'll need `gcc` 13, `cmake`, `ninja` and `poco` library. Install dependencies:
+
+Ubuntu/Debian:
+
+``` bash
+sudo apt install gcc cmake ninja-build libpoco-dev
+```
+
+Clone repo and build Rito:
+
+``` bash
+git clone git@github.com:bartekprtc/rito.git
+cd rito
+cmake -S . -B build
+cmake --build build
+```
+
+Install library:
+
+``` bash
+sudo cmake --build build -t install
+```
+
+### Detailed build guide
+
 Rito uses cmake as a build system. It can be built with gcc-13 on Linux and with msvc on Windows. It depends on Poco library (with SSL). For details, see [Building Rito](https://github.com/bartekprtc/rito/wiki/Building-Rito) wiki page.
 
 ## Usage
