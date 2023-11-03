@@ -1,6 +1,6 @@
 # rito library - overview
-![linux build](https://github.com/bartekprtcc/rito/actions/workflows/linux_gcc_13.yml/badge.svg)
-![windows build](https://github.com/bartekprtcc/rito/actions/workflows/windows_cl.yml/badge.svg)
+![linux build](https://github.com/bartekprtc/rito/actions/workflows/linux_gcc_13.yml/badge.svg)
+![windows build](https://github.com/bartekprtc/rito/actions/workflows/windows_cl.yml/badge.svg)
 
 Rito is a simple, crossplatform (Windows and Linux) C++20 library interfacing with Riot services (i.e. Riot REST API and Riot Client). It is currently in development - API changes might occur at some point. Rito uses Poco library in the backend. It offers a few classes which handle communication with Riot REST API, as well as with League Client (LCU). For League Client, Rito supports both REST API and Websocket communication.
 
