@@ -16,13 +16,13 @@ You want to:
 - Connect to League client using Websocket? Use `Lcu_websocket_handler` class
 - Use LCU events (with WAMP protocol over Websocket)? Use `Lcu_wamp_handler` class
 
-Details in "Docs" wiki page.
+Details in [Docs](https://github.com/bartekprtc/rito/wiki/Docs) wiki page.
 
 ## Build
-Rito uses cmake as a build system. It can be built with gcc-13 on Linux and with msvc on Windows. It depends on Poco library (with SSL). For details, see "Building Rito" wiki page.
+Rito uses cmake as a build system. It can be built with gcc-13 on Linux and with msvc on Windows. It depends on Poco library (with SSL). For details, see [Building Rito](https://github.com/bartekprtc/rito/wiki/Building-Rito) wiki page.
 
 ## Usage
-Rito can be either installed on the system, or integrated within cmake project. See "Using Rito" wiki page for more information on how to use the library and "Docs" wiki page for some brief overview of classes.
+Rito can be either installed on the system, or integrated within cmake project. See [Using Rito](https://github.com/bartekprtc/rito/wiki/Using-Rito) wiki page for more information on how to use the library and [Docs](https://github.com/bartekprtc/rito/wiki/Docs) wiki page for some brief overview of classes.
 
 ## Development/Contributing
-Rito was meant to be a simple League stat collection application, which turned into a library. Even though it's very simple, I decided to make it into proper github project (with CI, coverage, tests and other fancy stuff) for learning purposes. I am happy to accept suggestions, reviews and pull requests. If you wish to contribute (or you're just interested in running tests/static analysis locally), see "Contributing" wiki page.
+Rito was meant to be a simple League stat collection application, which turned into a library. Even though it's very simple, I decided to make it into proper github project (with CI, coverage, tests and other fancy stuff) for learning purposes. I am happy to accept suggestions, reviews and pull requests. If you wish to contribute (or you're just interested in running tests/static analysis locally), see [Contributing](https://github.com/bartekprtc/rito/wiki/Contributing) wiki page.
