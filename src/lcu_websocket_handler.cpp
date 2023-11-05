@@ -22,14 +22,14 @@ Lcu_websocket_handler::~Lcu_websocket_handler()
     stop();
 }
 
-void Lcu_websocket_handler::run()
+void Lcu_websocket_handler::run() noexcept
 {
     m_stop = false;
 
     main_loop();
 }
 
-void Lcu_websocket_handler::stop()
+void Lcu_websocket_handler::stop() noexcept
 {
     m_stop = true;
     if (is_connected())
@@ -136,22 +136,22 @@ void Lcu_websocket_handler::main_loop()
     }
 }
 
-void Lcu_websocket_handler::register_message_callback(Message_callback on_message_received)
+void Lcu_websocket_handler::register_message_callback(Message_callback on_message_received) noexcept
 {
     m_on_message_received = on_message_received;
 }
 
-void Lcu_websocket_handler::register_on_connected_callback(Connection_callback on_connected)
+void Lcu_websocket_handler::register_on_connected_callback(Connection_callback on_connected) noexcept
 {
     m_on_connected = on_connected;
 }
 
-void Lcu_websocket_handler::register_on_disconnected_callback(Connection_callback on_disconnected)
+void Lcu_websocket_handler::register_on_disconnected_callback(Connection_callback on_disconnected) noexcept
 {
     m_on_disconnected = on_disconnected;
 }
 
-bool Lcu_websocket_handler::send_message(std::string_view message)
+bool Lcu_websocket_handler::send_message(std::string_view message) noexcept
 {
     if (is_connected())
     {

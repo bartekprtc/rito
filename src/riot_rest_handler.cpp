@@ -10,8 +10,8 @@ namespace rito {
 
 std::string get_host_by_region(Region region);
 
-Riot_rest_handler::Riot_rest_handler(const std::string& apiKey)
-  : m_region{Region::none}, m_api_key{apiKey}
+Riot_rest_handler::Riot_rest_handler(const std::string& api_key)
+  : m_region{Region::none}, m_api_key{api_key}
 {
 }
 

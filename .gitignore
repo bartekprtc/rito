@@ -14,5 +14,9 @@ bin
 .vscode
 .vs
 
+# Docs
+/docs/html/
+/docs/latex/
+
 # personal - dev
 .nvim-dap.lua

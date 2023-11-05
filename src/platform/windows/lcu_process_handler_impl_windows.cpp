@@ -187,7 +187,6 @@ std::string Lcu_process_handler_impl::extract_process_command(HANDLE process_han
 
     std::string to;
     UnicodeConverter::convert(command, to);
-    //std::wstring command(command_buffer);
 
     delete[] command_buffer;
     delete process_parameters_buffer;

@@ -52,43 +52,48 @@ Lcu_wamp_handler::Lcu_wamp_handler() : m_is_connected{false}
       std::bind(&Lcu_wamp_handler::on_message, this, std::placeholders::_1));
 }
 
-void Lcu_wamp_handler::register_on_connected_callback(Connection_callback on_connected)
+void Lcu_wamp_handler::register_on_connected_callback(Connection_callback on_connected) noexcept
 {
     m_on_connected_callback = on_connected;
 }
 
-void Lcu_wamp_handler::register_on_disconnected_callback(Connection_callback on_disconnected)
+void Lcu_wamp_handler::register_on_disconnected_callback(Connection_callback on_disconnected) noexcept
 {
     m_on_disconnected_callback = on_disconnected;
 }
 
-void Lcu_wamp_handler::register_call_result_callback(Wamp_call_result_callback on_call_result)
+void Lcu_wamp_handler::register_call_result_callback(Wamp_call_result_callback on_call_result) noexcept
 {
     m_on_call_result_callback = on_call_result;
 }
 
-void Lcu_wamp_handler::register_call_error_callback(Wamp_call_error_callback on_call_error)
+void Lcu_wamp_handler::register_call_error_callback(Wamp_call_error_callback on_call_error) noexcept
 {
     m_on_call_error_callback = on_call_error;
 }
 
-void Lcu_wamp_handler::register_event_callback(Wamp_event_callback on_event)
+void Lcu_wamp_handler::register_event_callback(Wamp_event_callback on_event) noexcept
 {
     m_on_event_callback = on_event;
 }
 
-void Lcu_wamp_handler::run()
+void Lcu_wamp_handler::run() noexcept
 {
     m_lcu_websocket_handler.run();
 }
 
-bool Lcu_wamp_handler::subscribe(const std::string& event)
+void Lcu_wamp_handler::stop() noexcept
+{
+    m_lcu_websocket_handler.stop();
+}
+
+bool Lcu_wamp_handler::subscribe(const std::string& event) noexcept
 {
     return m_lcu_websocket_handler.send_message(
       std::format("[{}, \"{}\"]", static_cast<int>(Wamp_message_type::subscribe), event));
 }
 
-bool Lcu_wamp_handler::unsubscribe(const std::string& event)
+bool Lcu_wamp_handler::unsubscribe(const std::string& event) noexcept
 {
     return m_lcu_websocket_handler.send_message(
       std::format("[{}, \"{}\"]", static_cast<int>(Wamp_message_type::unsubscribe), event));
