@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Rito: Main Page</title>
+<title>Rito: rito</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -61,11 +61,62 @@ $(function() {
 </iframe>
 </div>
 
-<div class="header">
+<div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">Rito Documentation</div>  </div>
+<div class="title">rito </div>  </div>
 </div><!--header-->
 <div class="contents">
+<div class="textblock"><p><a class="anchor" id="md_README"></a> <img src="https://github.com/bartekprtc/rito/actions/workflows/linux_gcc_13.yml/badge.svg" alt="linux build" style="pointer-events: none;" class="inline"/> <img src="https://github.com/bartekprtc/rito/actions/workflows/windows_cl.yml/badge.svg" alt="windows build" style="pointer-events: none;" class="inline"/></p>
+<h1><a class="anchor" id="autotoc_md1"></a>
+Overview</h1>
+<p>Rito is a simple, crossplatform (Windows and Linux) C++20 library interfacing with Riot services (i.e. Riot REST API and League of Legends client). It is currently in development - API changes might occur at some point. Rito uses <a href="https://github.com/pocoproject/poco">POCO</a> library in the backend. It offers a few classes which handle communication with Riot REST API, as well as with LoL client (LCU). For League client, Rito supports both REST API and Websocket communication.</p>
+<h1><a class="anchor" id="autotoc_md2"></a>
+Features</h1>
+<p>You want to:</p><ul>
+<li>Use Riot REST API easily? Use <code>Riot_rest_handler</code> class</li>
+<li>Get League client (LCU) params (port &amp; remoting auth token) easily? Use <code>Lcu_process_handler</code> class</li>
+<li>Use League client REST API? Use <code>Lcu_rest_handler</code> class</li>
+<li>Connect to League client using Websocket? Use <code>Lcu_websocket_handler</code> class</li>
+<li>Use LCU events (with WAMP protocol over Websocket)? Use <code>Lcu_wamp_handler</code> class</li>
+</ul>
+<p>Details in <a href="https://github.com/bartekprtc/rito/wiki/Docs">Docs</a> wiki page and in <a href="https://bartekprtc.github.io/rito/">Doxygen documentation</a>.</p>
+<h1><a class="anchor" id="autotoc_md3"></a>
+Build</h1>
+<h2><a class="anchor" id="autotoc_md4"></a>
+Quickstart</h2>
+<h3><a class="anchor" id="autotoc_md5"></a>
+Windows</h3>
+<p>You'll need <code>msvc</code> from <code>Visual Studio 2022</code> and <code>cmake</code>. Clone rito recursively:</p>
+<div class="fragment"><div class="line">&gt; git clone --recursive git@github.com:bartekprtc/rito.git</div>
+</div><!-- fragment --><p>Use embedded vcpkg to get all dependencies:</p>
+<div class="fragment"><div class="line">&gt; .\tools\vcpkg\bootstrap-vcpkg.bat</div>
+<div class="line">&gt; .\tools\vcpkg\vcpkg.exe install poco[netssl]</div>
+</div><!-- fragment --><p>Configure, build and install the library:</p>
+<div class="fragment"><div class="line">&gt; cmake -S . -B build &quot;-DCMAKE_TOOLCHAIN_FILE=.\tools\vcpkg\scripts\buildsystems\vcpkg.make&quot;</div>
+<div class="line">&gt; cmake --build build --config Release</div>
+<div class="line">&gt; cmake --build build -t install</div>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md6"></a>
+Linux</h3>
+<p>You'll need <code>gcc</code> 13, <code>cmake</code>, <code>ninja</code> and <code>poco</code> library. Install dependencies:</p>
+<p>Ubuntu/Debian:</p>
+<div class="fragment"><div class="line">sudo apt install gcc cmake ninja-build libpoco-dev</div>
+</div><!-- fragment --><p>Clone repo and build Rito:</p>
+<div class="fragment"><div class="line">git clone git@github.com:bartekprtc/rito.git</div>
+<div class="line">cd rito</div>
+<div class="line">cmake -S . -B build</div>
+<div class="line">cmake --build build</div>
+</div><!-- fragment --><p>Install library:</p>
+<div class="fragment"><div class="line">sudo cmake --build build -t install</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md7"></a>
+Detailed build guide</h2>
+<p>Rito uses cmake as a build system. It can be built with gcc-13 on Linux and with msvc on Windows. It depends on Poco library (with SSL). For details, see <a href="https://github.com/bartekprtc/rito/wiki/Building-Rito">Building Rito</a> wiki page.</p>
+<h1><a class="anchor" id="autotoc_md8"></a>
+Usage</h1>
+<p>Rito can be either installed on the system, or integrated within cmake project. See <a href="https://github.com/bartekprtc/rito/wiki/Using-Rito">Using Rito</a> wiki page for more information on how to use the library and <a href="https://github.com/bartekprtc/rito/wiki/Docs">Docs</a> wiki page for some brief overview of classes.</p>
+<h1><a class="anchor" id="autotoc_md9"></a>
+Development/Contributing</h1>
+<p>Rito was meant to be a simple League stat collection application, which turned into a library. Even though it's very simple, I decided to make it into proper github project (with CI, coverage, tests and other fancy stuff) for learning purposes. I am happy to accept suggestions, reviews and pull requests. If you wish to contribute (or you're just interested in running tests/static analysis locally), see <a href="https://github.com/bartekprtc/rito/wiki/Contributing">Contributing</a> wiki page. </p>
+</div></div><!-- PageDoc -->
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

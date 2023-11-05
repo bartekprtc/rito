@@ -14,7 +14,7 @@ var searchData=
   ['response_51',['response',['../structrito_1_1Http__response.html#acb8003e901660fd14c1052bd79f899e6',1,'rito::Http_response']]],
   ['riot_5frest_5fhandler_52',['Riot_rest_handler',['../classrito_1_1Riot__rest__handler.html#a9606309ed47a4b1e1a75b401ded4be92',1,'rito::Riot_rest_handler::Riot_rest_handler()'],['../classrito_1_1Riot__rest__handler.html',1,'rito::Riot_rest_handler']]],
   ['riot_5frest_5fhandler_2eh_53',['riot_rest_handler.h',['../riot__rest__handler_8h.html',1,'']]],
-  ['rito_54',['rito',['../namespacerito.html',1,'']]],
+  ['rito_54',['rito',['../index.html',1,'(Global Namespace)'],['../namespacerito.html',1,'rito']]],
   ['ru_55',['ru',['../namespacerito.html#ac39a24522a54c040daa6850df7feee71a89484b14b36a8d5329426a3d944d2983',1,'rito']]],
   ['run_56',['run',['../classrito_1_1Lcu__websocket__handler.html#a1c56976b4fca8f90a52f8cb0da415b15',1,'rito::Lcu_websocket_handler::run()'],['../classrito_1_1Lcu__wamp__handler.html#a167b789af96285015dc25de1720cabe7',1,'rito::Lcu_wamp_handler::run()']]]
 ];
