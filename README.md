@@ -52,22 +52,22 @@ You'll need `gcc` 13, `cmake`, `ninja` and `poco` library. Install dependencies:
 Ubuntu/Debian:
 
 ``` bash
-sudo apt install gcc cmake ninja-build libpoco-dev
+$ sudo apt install gcc cmake ninja-build libpoco-dev
 ```
 
 Clone repo and build Rito:
 
 ``` bash
-git clone git@github.com:bartekprtc/rito.git
-cd rito
-cmake -S . -B build
-cmake --build build
+$ git clone git@github.com:bartekprtc/rito.git
+$ cd rito
+$ cmake -S . -B build
+$ cmake --build build
 ```
 
 Install library:
 
 ``` bash
-sudo cmake --build build -t install
+$ sudo cmake --build build -t install
 ```
 
 ### Detailed build guide
