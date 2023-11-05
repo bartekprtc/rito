@@ -22,6 +22,31 @@ Details in [Docs](https://github.com/bartekprtc/rito/wiki/Docs) wiki page.
 
 ### Quickstart
 
+#### Windows
+
+You'll need `msvc` from `Visual Studio 2022` and `cmake`. Clone rito recursively:
+
+``` powershell
+> git clone --recursive git@github.com:bartekprtc/rito.git
+```
+
+Use embedded vcpkg to get all dependencies:
+
+``` powershell
+> .\tools\vcpkg\bootstrap-vcpkg.bat
+> .\tools\vcpkg\vcpkg.exe install poco[netssl]
+```
+
+Configure, build and install the library:
+
+``` powershell
+> cmake -S . -B build "-DCMAKE_TOOLCHAIN_FILE=.\tools\vcpkg\scripts\buildsystems\vcpkg.make"
+> cmake --build build --config Release
+> cmake --build build -t install
+```
+
+#### Linux
+
 You'll need `gcc` 13, `cmake`, `ninja` and `poco` library. Install dependencies:
 
 Ubuntu/Debian:
