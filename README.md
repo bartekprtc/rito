@@ -16,7 +16,7 @@ You want to:
 - Connect to League client using Websocket? Use `Lcu_websocket_handler` class
 - Use LCU events (with WAMP protocol over Websocket)? Use `Lcu_wamp_handler` class
 
-Details in [Docs](https://github.com/bartekprtc/rito/wiki/Docs) wiki page.
+Details in [Docs](https://github.com/bartekprtc/rito/wiki/Docs) wiki page and in [Doxygen documentation](https://bartekprtc.github.io/rito/).
 
 ## Build
 
