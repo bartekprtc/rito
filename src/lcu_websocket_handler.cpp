@@ -144,12 +144,14 @@ void Lcu_websocket_handler::register_message_callback(Message_callback on_messag
     m_on_message_received = std::move(on_message_received);
 }
 
-void Lcu_websocket_handler::register_on_connected_callback(Connection_callback on_connected) noexcept
+void Lcu_websocket_handler::register_on_connected_callback(
+  Connection_callback on_connected) noexcept
 {
     m_on_connected = std::move(on_connected);
 }
 
-void Lcu_websocket_handler::register_on_disconnected_callback(Connection_callback on_disconnected) noexcept
+void Lcu_websocket_handler::register_on_disconnected_callback(
+  Connection_callback on_disconnected) noexcept
 {
     m_on_disconnected = std::move(on_disconnected);
 }

@@ -95,14 +95,16 @@ void Lcu_wamp_handler::stop() noexcept
 
 auto Lcu_wamp_handler::subscribe(const std::string& event) noexcept -> bool
 {
-    return m_lcu_websocket_handler.send_message(
-      std::format("[{}, \"{}\"]", static_cast<int>(Wamp_message_type::subscribe), event));
+    std::string message{"["s + std::to_string(static_cast<int>(Wamp_message_type::subscribe)) +
+                        ", \"" + event + "\""};
+    return m_lcu_websocket_handler.send_message(message);
 }
 
 auto Lcu_wamp_handler::unsubscribe(const std::string& event) noexcept -> bool
 {
-    return m_lcu_websocket_handler.send_message(
-      std::format("[{}, \"{}\"]", static_cast<int>(Wamp_message_type::unsubscribe), event));
+    std::string message{"["s + std::to_string(static_cast<int>(Wamp_message_type::unsubscribe)) +
+                        ", \"" + event + "\""};
+    return m_lcu_websocket_handler.send_message(message);
 }
 
 void Lcu_wamp_handler::on_connected()
@@ -197,7 +199,8 @@ void Lcu_wamp_handler::on_call_error(const std::string& identifier,
 auto Lcu_wamp_handler::call(const std::string& identifier, const std::string& function) noexcept
   -> bool
 {
-    return m_lcu_websocket_handler.send_message(std::format(
-      R"([{}, "{}", "{}"])", static_cast<int>(Wamp_message_type::call), identifier, function));
+    std::string message{"["s + std::to_string(static_cast<int>(Wamp_message_type::subscribe)) +
+                        ", \"" + identifier + "\", \"" + function + "\"]"};
+    return m_lcu_websocket_handler.send_message(message);
 }
 } // namespace rito

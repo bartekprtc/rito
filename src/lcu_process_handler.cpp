@@ -4,7 +4,8 @@
 
 namespace rito {
 
-Lcu_process_handler::Lcu_process_handler(std::filesystem::path proc_dir) : m_pimpl{std::make_unique<Lcu_process_handler_impl>(std::move(proc_dir))}
+Lcu_process_handler::Lcu_process_handler(std::filesystem::path proc_dir)
+  : m_pimpl{std::make_unique<Lcu_process_handler_impl>(std::move(proc_dir))}
 {
 }
 

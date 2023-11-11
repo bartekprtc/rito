@@ -89,7 +89,8 @@ auto Https_websocket_client::send_message(std::string_view message) -> bool
 {
     if (m_websocket)
     {
-        m_websocket->sendFrame(message.data(), static_cast<int>(message.size()), WebSocket::FRAME_TEXT);
+        m_websocket->sendFrame(
+          message.data(), static_cast<int>(message.size()), WebSocket::FRAME_TEXT);
         return true;
     }
 
