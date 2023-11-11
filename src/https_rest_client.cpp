@@ -73,8 +73,6 @@ auto Https_rest_client::receive_response() -> Http_response
     {
         throw Message_exception{"Unable to receive message from the server ("s + e.what() + ")"};
     }
-
-    throw Unknown_exception{"HttpsRestClient: Unexpected error while receiving message"};
 }
 
 auto to_poco_request_type(Request_type type) -> std::string

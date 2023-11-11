@@ -36,6 +36,35 @@ generate_export_header(Rito)
 
 target_compile_features(Rito PUBLIC cxx_std_20)
 
+if (CMAKE_CXX_COMPILER_ID MATCHES "Clang"
+        OR
+    CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+    target_compile_options(Rito PRIVATE
+        -Wextra
+        -Wall
+        -Werror
+        -Wfloat-equal
+        -Wshadow
+        -Wpointer-arith
+        -Wcast-align
+        -Wstrict-overflow=5
+        -Wwrite-strings
+        -Wcast-qual
+        -Wswitch-enum
+        -Wconversion
+        -Wunreachable-code
+        -Wformat=2
+        -Wuninitialized
+        -Winit-self
+        -pedantic
+    )
+elseif(CMAKE_CXX_COMPILER_IR STREQUAL "MSVC")
+    target_compile_options(Rito PRIVATE
+        /Wall
+    )
+
+endif()
+
 if (LINUX)
     target_include_directories(Rito
         PRIVATE

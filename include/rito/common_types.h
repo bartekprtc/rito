@@ -83,17 +83,17 @@ struct RITO_EXPORT Http_response
     /**
      * @brief Holds status code (200 - OK, 404 - not found, etc.)
      */
-    std::int32_t status;
+    std::int32_t status{};
 
     /**
      * @brief Holds reason (if status is different than 200)
      */
-    std::string reason;
+    std::string reason{};
 
     /**
      * @brief Holds payload of HTTP response.
      */
-    std::string response;
+    std::string response{};
 };
 
 } // namespace rito
