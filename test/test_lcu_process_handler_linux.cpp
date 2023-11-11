@@ -89,9 +89,8 @@ TEST(LcuProcessHandlerLinux, ShouldThrowIfAppPortIsMissing)
 TEST(LcuProcessHandlerLinux, ShouldReturnValuesIfLcuIsRunning)
 {
     const auto path_lcu_running_with_id_124{base_dir + "lcu_running_with_id_124"};
-    constexpr auto proc_id_124{124};
     constexpr auto proc_124_app_port{12345};
-    const auto proc_124_remoting_auth_token{"MyExampleAuthToken"};
+    const std::string proc_124_remoting_auth_token{"MyExampleAuthToken"};
 
     rito::Lcu_process_handler process_handler{path_lcu_running_with_id_124};
 

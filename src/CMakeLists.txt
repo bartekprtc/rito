@@ -62,7 +62,6 @@ elseif(CMAKE_CXX_COMPILER_IR STREQUAL "MSVC")
     target_compile_options(Rito PRIVATE
         /Wall
     )
-
 endif()
 
 if (LINUX)

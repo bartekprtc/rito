@@ -25,6 +25,38 @@ gtest_discover_tests(Rito-test
         ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
+if (CMAKE_CXX_COMPILER_ID MATCHES "Clang"
+        OR
+    CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+    target_compile_options(Rito-test PRIVATE
+        -Wextra
+        -Wall
+        -Werror
+        -Wfloat-equal
+        -Wshadow
+        -Wpointer-arith
+        -Wcast-align
+        -Wstrict-overflow=5
+        -Wwrite-strings
+        -Wcast-qual
+        -Wswitch-enum
+        -Wconversion
+        -Wunreachable-code
+        -Wformat=2
+        -Wuninitialized
+        -Winit-self
+        -pedantic
+
+        -fsanitize=address
+        -fsanitize=leak
+        -fsanitize=undefined
+    )
+    target_link_options(Rito-test PRIVATE
+        -fsanitize=address
+        -fsanitize=undefined
+    )
+endif()
+
 # Coverage
 if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
     target_link_libraries(Rito

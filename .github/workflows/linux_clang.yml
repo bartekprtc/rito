@@ -54,7 +54,7 @@ jobs:
       shell: bash
       run: cmake --build build
 
-    - name: Run tests
+    - name: Run tests + sanitizers
       shell: bash
       run: ctest -VV --test-dir build
 
@@ -88,7 +88,7 @@ jobs:
       shell: bash
       run: cmake --build build
 
-    - name: Run tests
+    - name: Run tests + sanitizers
       shell: bash
       run: ctest -VV --test-dir build
 
