@@ -279,8 +279,7 @@ Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true if message is sent successfully, false otherwise.</dd></dl>
 <p>This method should be called only if another thread has called <a class="el" href="classrito_1_1Lcu__websocket__handler.html#a1c56976b4fca8f90a52f8cb0da415b15" title="Starts internal polling loop. Will not return unless stop() is called from another thread.">run()</a>. If <a class="el" href="classrito_1_1Lcu__websocket__handler.html#a1c56976b4fca8f90a52f8cb0da415b15" title="Starts internal polling loop. Will not return unless stop() is called from another thread.">run()</a> was not called, there is no connection to LCU. Messages are not queued.</p>
-<p>This method should be called from separate thread.</p>
-<dl class="section note"><dt>Note</dt><dd>Do not call this method from callback functions registered for LCU connected and LCU disconnected events (via <a class="el" href="classrito_1_1Lcu__websocket__handler.html#a8e3171ae9c3af8deb53ce8c056cd20a1" title="Registers callback function for LCU connected event.">register_on_connected_callback()</a> and <a class="el" href="classrito_1_1Lcu__websocket__handler.html#a6dc6553d33b19d2a14b7106f298137ef" title="Registers callback function for LCU disconnected event.">register_on_disconnected_callback()</a> methods). This will cause a deadlock. </dd></dl>
+<p>This method should be called from separate thread. </p>
 
 </div>
 </div>

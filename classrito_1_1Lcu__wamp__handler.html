@@ -104,8 +104,11 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a7a01e1f6ea9dc64e77a164a362223fdb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad8cacbd983b5b168d60b16a1296a0a0f"><td class="memTemplParams" colspan="2">template&lt;Convertible_to_string... Args&gt; </td></tr>
 <tr class="memitem:ad8cacbd983b5b168d60b16a1296a0a0f"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrito_1_1Lcu__wamp__handler.html#ad8cacbd983b5b168d60b16a1296a0a0f">call</a> (const std::string &amp;id, const std::string &amp;function, Args &amp;&amp;... args) noexcept</td></tr>
-<tr class="memdesc:ad8cacbd983b5b168d60b16a1296a0a0f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends message of WAMP type CALL to the LCU (if it's connected).  <a href="classrito_1_1Lcu__wamp__handler.html#ad8cacbd983b5b168d60b16a1296a0a0f">More...</a><br /></td></tr>
+<tr class="memdesc:ad8cacbd983b5b168d60b16a1296a0a0f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends message of WAMP type CALL (with arguments) to the LCU (if it's connected).  <a href="classrito_1_1Lcu__wamp__handler.html#ad8cacbd983b5b168d60b16a1296a0a0f">More...</a><br /></td></tr>
 <tr class="separator:ad8cacbd983b5b168d60b16a1296a0a0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac35215d4e420060859a687968f3b26bb"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrito_1_1Lcu__wamp__handler.html#ac35215d4e420060859a687968f3b26bb">call</a> (const std::string &amp;id, const std::string &amp;function) noexcept</td></tr>
+<tr class="memdesc:ac35215d4e420060859a687968f3b26bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends message of WAMP type CALL (without arguments) to the LCU (if it's connected).  <a href="classrito_1_1Lcu__wamp__handler.html#ac35215d4e420060859a687968f3b26bb">More...</a><br /></td></tr>
+<tr class="separator:ac35215d4e420060859a687968f3b26bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8406334192c51749fd73ad54e2dfd3f5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrito_1_1Lcu__wamp__handler.html#a8406334192c51749fd73ad54e2dfd3f5">subscribe</a> (const std::string &amp;event) noexcept</td></tr>
 <tr class="memdesc:a8406334192c51749fd73ad54e2dfd3f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends message of WAMP type SUBSCRIBE to the LCU (if it's connected).  <a href="classrito_1_1Lcu__wamp__handler.html#a8406334192c51749fd73ad54e2dfd3f5">More...</a><br /></td></tr>
 <tr class="separator:a8406334192c51749fd73ad54e2dfd3f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -123,13 +126,62 @@ Public Member Functions</h2></td></tr>
 <li>Message received (of WAMP type EVENT).</li>
 </ul>
 <p>There are two ways (not mutually exclusive - you may use both at the same time) to use this class:</p><ul>
-<li>using <a class="el" href="classrito_1_1Lcu__wamp__handler.html#ad8cacbd983b5b168d60b16a1296a0a0f" title="Sends message of WAMP type CALL to the LCU (if it&#39;s connected).">call()</a> method will result in response being received either via on_call_result callback or via on_call_error callback,</li>
+<li>using <a class="el" href="classrito_1_1Lcu__wamp__handler.html#ad8cacbd983b5b168d60b16a1296a0a0f" title="Sends message of WAMP type CALL (with arguments) to the LCU (if it&#39;s connected).">call()</a> method will result in response being received either via on_call_result callback or via on_call_error callback,</li>
 <li>using <a class="el" href="classrito_1_1Lcu__wamp__handler.html#a8406334192c51749fd73ad54e2dfd3f5" title="Sends message of WAMP type SUBSCRIBE to the LCU (if it&#39;s connected).">subscribe()</a> and <a class="el" href="classrito_1_1Lcu__wamp__handler.html#a29053ba3fb269bc603c53a982bfc176f" title="Sends message of WAMP type UNSUBSCRIBE to the LCU (if it&#39;s connected).">unsubscribe()</a> to manage subscriptions will result in registered events being received via on_event callback.</li>
 </ul>
-<p>This class requires at least two threads: one for running the internal loop by calling <a class="el" href="classrito_1_1Lcu__wamp__handler.html#a167b789af96285015dc25de1720cabe7" title="Starts internal polling loop. Will not return unless stop() is called from another thread.">run()</a> and the other one for sending messages (via <a class="el" href="classrito_1_1Lcu__wamp__handler.html#ad8cacbd983b5b168d60b16a1296a0a0f" title="Sends message of WAMP type CALL to the LCU (if it&#39;s connected).">call()</a>, <a class="el" href="classrito_1_1Lcu__wamp__handler.html#a8406334192c51749fd73ad54e2dfd3f5" title="Sends message of WAMP type SUBSCRIBE to the LCU (if it&#39;s connected).">subscribe()</a> and <a class="el" href="classrito_1_1Lcu__wamp__handler.html#a29053ba3fb269bc603c53a982bfc176f" title="Sends message of WAMP type UNSUBSCRIBE to the LCU (if it&#39;s connected).">unsubscribe()</a>) and stopping the loop (via <a class="el" href="classrito_1_1Lcu__wamp__handler.html#a7a01e1f6ea9dc64e77a164a362223fdb" title="Stops internal loop. Drops LCU connection (if such connection was established).">stop()</a>) if necessary. </p>
+<p>This class requires at least two threads: one for running the internal loop by calling <a class="el" href="classrito_1_1Lcu__wamp__handler.html#a167b789af96285015dc25de1720cabe7" title="Starts internal polling loop. Will not return unless stop() is called from another thread.">run()</a> and the other one for sending messages (via <a class="el" href="classrito_1_1Lcu__wamp__handler.html#ad8cacbd983b5b168d60b16a1296a0a0f" title="Sends message of WAMP type CALL (with arguments) to the LCU (if it&#39;s connected).">call()</a>, <a class="el" href="classrito_1_1Lcu__wamp__handler.html#a8406334192c51749fd73ad54e2dfd3f5" title="Sends message of WAMP type SUBSCRIBE to the LCU (if it&#39;s connected).">subscribe()</a> and <a class="el" href="classrito_1_1Lcu__wamp__handler.html#a29053ba3fb269bc603c53a982bfc176f" title="Sends message of WAMP type UNSUBSCRIBE to the LCU (if it&#39;s connected).">unsubscribe()</a>) and stopping the loop (via <a class="el" href="classrito_1_1Lcu__wamp__handler.html#a7a01e1f6ea9dc64e77a164a362223fdb" title="Stops internal loop. Drops LCU connection (if such connection was established).">stop()</a>) if necessary. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="ac35215d4e420060859a687968f3b26bb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac35215d4e420060859a687968f3b26bb">&#9670;&nbsp;</a></span>call() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool rito::Lcu_wamp_handler::call </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>function</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sends message of WAMP type CALL (without arguments) to the LCU (if it's connected). </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>- ID of the CALL request. If response is received, it will have the same ID. </td></tr>
+    <tr><td class="paramname">function</td><td>- LCU function to be invoked.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if message is sent successfully, false otherwise.</dd></dl>
+<p>This method sends message to LCU formatted as WAMP CALL message. Expected response is either CALL.RESULT or CALL.ERROR, depending on whether CALL is successful.</p>
+<p>This method should be called only if another thread has called <a class="el" href="classrito_1_1Lcu__wamp__handler.html#a167b789af96285015dc25de1720cabe7" title="Starts internal polling loop. Will not return unless stop() is called from another thread.">run()</a>. If <a class="el" href="classrito_1_1Lcu__wamp__handler.html#a167b789af96285015dc25de1720cabe7" title="Starts internal polling loop. Will not return unless stop() is called from another thread.">run()</a> was not called, there is no connection to LCU. Messages are not queued.</p>
+<p>This method should be called from separate thread. </p>
+
+</div>
+</div>
 <a id="ad8cacbd983b5b168d60b16a1296a0a0f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad8cacbd983b5b168d60b16a1296a0a0f">&#9670;&nbsp;</a></span>call()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ad8cacbd983b5b168d60b16a1296a0a0f">&#9670;&nbsp;</a></span>call() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -170,7 +222,7 @@ template&lt;Convertible_to_string... Args&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Sends message of WAMP type CALL to the LCU (if it's connected). </p>
+<p>Sends message of WAMP type CALL (with arguments) to the LCU (if it's connected). </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">id</td><td>- ID of the CALL request. If response is received, it will have the same ID. </td></tr>
@@ -182,8 +234,7 @@ template&lt;Convertible_to_string... Args&gt; </div>
 <dl class="section return"><dt>Returns</dt><dd>true if message is sent successfully, false otherwise.</dd></dl>
 <p>This method sends message to LCU formatted as WAMP CALL message. Expected response is either CALL.RESULT or CALL.ERROR, depending on whether CALL is successful.</p>
 <p>This method should be called only if another thread has called <a class="el" href="classrito_1_1Lcu__wamp__handler.html#a167b789af96285015dc25de1720cabe7" title="Starts internal polling loop. Will not return unless stop() is called from another thread.">run()</a>. If <a class="el" href="classrito_1_1Lcu__wamp__handler.html#a167b789af96285015dc25de1720cabe7" title="Starts internal polling loop. Will not return unless stop() is called from another thread.">run()</a> was not called, there is no connection to LCU. Messages are not queued.</p>
-<p>This method should be called from separate thread.</p>
-<dl class="section note"><dt>Note</dt><dd>Do not call this method from callback functions registered for LCU connected and LCU disconnected events (via <a class="el" href="classrito_1_1Lcu__wamp__handler.html#a73b2fdafb00f275401d4e9fd677fd70f" title="Registers callback function for LCU connected event.">register_on_connected_callback()</a> and <a class="el" href="classrito_1_1Lcu__wamp__handler.html#a06e0495d5f6392f34fe6a25e169be891" title="Registers callback function for LCU disconnected event.">register_on_disconnected_callback()</a> methods). This will cause a deadlock. </dd></dl>
+<p>This method should be called from separate thread. </p>
 
 </div>
 </div>
@@ -459,9 +510,7 @@ template&lt;Convertible_to_string... Args&gt; </div>
 <p>This method sends message to LCU formatted as WAMP SUBSCRIBE message. If successful, it causes LCU to send events of requested type. They are reported via on_event callback.</p>
 <p>This method should be called only if another thread has called <a class="el" href="classrito_1_1Lcu__wamp__handler.html#a167b789af96285015dc25de1720cabe7" title="Starts internal polling loop. Will not return unless stop() is called from another thread.">run()</a>. If <a class="el" href="classrito_1_1Lcu__wamp__handler.html#a167b789af96285015dc25de1720cabe7" title="Starts internal polling loop. Will not return unless stop() is called from another thread.">run()</a> was not called, there is no connection to LCU. Messages are not queued.</p>
 <p>This method should be called from separate thread.</p>
-<dl class="section note"><dt>Note</dt><dd>Do not call this method from callback functions registered for LCU connected and LCU disconnected events (via <a class="el" href="classrito_1_1Lcu__wamp__handler.html#a73b2fdafb00f275401d4e9fd677fd70f" title="Registers callback function for LCU connected event.">register_on_connected_callback()</a> and <a class="el" href="classrito_1_1Lcu__wamp__handler.html#a06e0495d5f6392f34fe6a25e169be891" title="Registers callback function for LCU disconnected event.">register_on_disconnected_callback()</a> methods). This will cause a deadlock.</dd>
-<dd>
-Subscription information is lost between sessions. If LCU is disconnected from and then connected to again, you'll need to subscribe to your events again. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Subscription information is lost between sessions. If LCU is disconnected from and then connected to again, you'll need to subscribe to your events again. </dd></dl>
 
 </div>
 </div>
@@ -499,8 +548,7 @@ Subscription information is lost between sessions. If LCU is disconnected from a
 <dl class="section return"><dt>Returns</dt><dd>true if message is sent successfully, false otherwise.</dd></dl>
 <p>This method sends message to LCU formatted as WAMP UNSUBSCRIBE message. If successful, it causes LCU to stop sending events of requested type.</p>
 <p>This method should be called only if another thread has called <a class="el" href="classrito_1_1Lcu__wamp__handler.html#a167b789af96285015dc25de1720cabe7" title="Starts internal polling loop. Will not return unless stop() is called from another thread.">run()</a>. If <a class="el" href="classrito_1_1Lcu__wamp__handler.html#a167b789af96285015dc25de1720cabe7" title="Starts internal polling loop. Will not return unless stop() is called from another thread.">run()</a> was not called, there is no connection to LCU. Messages are not queued.</p>
-<p>This method should be called from separate thread.</p>
-<dl class="section note"><dt>Note</dt><dd>Do not call this method from callback functions registered for LCU connected and LCU disconnected events (via <a class="el" href="classrito_1_1Lcu__wamp__handler.html#a73b2fdafb00f275401d4e9fd677fd70f" title="Registers callback function for LCU connected event.">register_on_connected_callback()</a> and <a class="el" href="classrito_1_1Lcu__wamp__handler.html#a06e0495d5f6392f34fe6a25e169be891" title="Registers callback function for LCU disconnected event.">register_on_disconnected_callback()</a> methods). This will cause a deadlock. </dd></dl>
+<p>This method should be called from separate thread. </p>
 
 </div>
 </div>
