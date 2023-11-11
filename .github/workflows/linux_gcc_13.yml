@@ -23,6 +23,20 @@ jobs:
         sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-13 100 --slave /usr/bin/g++ g++ /usr/bin/g++-13 --slave /usr/bin/gcov gcov /usr/bin/gcov-13
         sudo update-alternatives --set gcc /usr/bin/gcc-13
 
+    - name: Install clang-16 (for clang-tidy)
+      shell: bash
+      run: |
+        wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add -
+        . /etc/lsb-release
+        sudo add-apt-repository -y "deb http://apt.llvm.org/${DISTRIB_CODENAME}/ llvm-toolchain-${DISTRIB_CODENAME}-16 main"
+        sudo apt install -y clang-16 llvm-16
+        sudo update-alternatives --install /usr/bin/clang clang /usr/bin/clang-16 100
+        sudo update-alternatives --set clang /usr/bin/clang-16
+
+    - name: Show clang-tidy version
+      shell: bash
+      run: clang-tidy --version
+
     - name: Configure CMake for Debug build
       shell: cmake -P {0}
       run: |
