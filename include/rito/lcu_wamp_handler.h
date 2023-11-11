@@ -251,8 +251,6 @@ private:
                        const std::string& error,
                        const std::string& error_description);
 
-    bool m_is_connected;
-
     Lcu_websocket_handler m_lcu_websocket_handler;
 
     Connection_callback m_on_connected_callback;

@@ -41,7 +41,7 @@ auto parse_event(JSON::Array::Ptr message_json_array) -> std::tuple<std::string,
     return {event_name, event_data};
 }
 
-Lcu_wamp_handler::Lcu_wamp_handler() : m_is_connected{false}
+Lcu_wamp_handler::Lcu_wamp_handler()
 {
     m_lcu_websocket_handler.register_on_connected_callback([this] {
         on_connected();
