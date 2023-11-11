@@ -1,6 +1,7 @@
 # rito
 
-![linux build](https://github.com/bartekprtc/rito/actions/workflows/linux_gcc_13.yml/badge.svg)
+![linux gcc build](https://github.com/bartekprtc/rito/actions/workflows/linux_gcc.yml/badge.svg)
+![linux clang build](https://github.com/bartekprtc/rito/actions/workflows/linux_clang.yml/badge.svg)
 ![windows build](https://github.com/bartekprtc/rito/actions/workflows/windows_cl.yml/badge.svg)
 
 ## Overview
@@ -47,12 +48,18 @@ Configure, build and install the library:
 
 #### Linux
 
-You'll need `gcc` 13, `cmake`, `ninja` and `poco` library. Install dependencies:
+You'll need `gcc` or `clang`, `cmake`, `ninja` and `poco` library. Install dependencies:
 
 Ubuntu/Debian:
 
 ``` bash
 $ sudo apt install gcc cmake ninja-build libpoco-dev
+```
+
+or
+
+``` bash
+$ sudo apt install clang cmake ninja-build libpoco-dev
 ```
 
 Clone repo and build Rito:
@@ -72,7 +79,7 @@ $ sudo cmake --build build -t install
 
 ### Detailed build guide
 
-Rito uses cmake as a build system. It can be built with gcc-13 on Linux and with msvc on Windows. It depends on Poco library (with SSL). For details, see [Building Rito](https://github.com/bartekprtc/rito/wiki/Building-Rito) wiki page.
+Rito uses cmake as a build system. It can be built with gcc or clang on Linux and with msvc on Windows. It depends on Poco library (with SSL). For details, see [Building Rito](https://github.com/bartekprtc/rito/wiki/Building-Rito) wiki page.
 
 ## Usage
 Rito can be either installed on the system, or integrated within cmake project. See [Using Rito](https://github.com/bartekprtc/rito/wiki/Using-Rito) wiki page for more information on how to use the library and [Docs](https://github.com/bartekprtc/rito/wiki/Docs) wiki page for some brief overview of classes.

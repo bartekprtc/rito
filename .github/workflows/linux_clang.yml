@@ -1,4 +1,4 @@
-name: linux gcc build
+name: linux clang build
 
 on:
   push:
@@ -27,7 +27,7 @@ jobs:
             -S ${{ github.workspace }}
             -B build
             -D CMAKE_BUILD_TYPE=Debug
-            -D CMAKE_CXX_COMPILER=g++
+            -D CMAKE_CXX_COMPILER=clang++
             -G Ninja
             -D BUILD_TESTING=ON
             -D CMAKE_INSTALL_PREFIX=build/install
@@ -45,19 +45,6 @@ jobs:
       shell: bash
       run: ctest -VV --test-dir build
 
-    - name: Build coverage
-      shell: bash
-      run: cmake --build build -t Rito-coverage
-
-    - name: Check coverage and generate coverage report
-      uses: zgosalvez/github-actions-report-lcov@v3
-      with:
-        coverage-files: build/*.info
-        minimum-coverage: 10
-        artifact-name: rito-gcc-coverage-report
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        update-comment: true
-
     - name: Install
       shell: bash
       run: cmake --build build -t install
@@ -74,7 +61,7 @@ jobs:
             -S ${{ github.workspace }}
             -B build
             -D CMAKE_BUILD_TYPE=Release
-            -D CMAKE_CXX_COMPILER=g++
+            -D CMAKE_CXX_COMPILER=clang++
             -G Ninja
             -D BUILD_TESTING=ON
             -D CMAKE_INSTALL_PREFIX=build/install
