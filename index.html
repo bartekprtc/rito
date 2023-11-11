@@ -66,7 +66,7 @@ $(function() {
 <div class="title">rito </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="md_README"></a> <img src="https://github.com/bartekprtc/rito/actions/workflows/linux_gcc_13.yml/badge.svg" alt="linux build" style="pointer-events: none;" class="inline"/> <img src="https://github.com/bartekprtc/rito/actions/workflows/windows_cl.yml/badge.svg" alt="windows build" style="pointer-events: none;" class="inline"/></p>
+<div class="textblock"><p><a class="anchor" id="md_README"></a> <img src="https://github.com/bartekprtc/rito/actions/workflows/linux_gcc.yml/badge.svg" alt="linux gcc build" style="pointer-events: none;" class="inline"/> <img src="https://github.com/bartekprtc/rito/actions/workflows/linux_clang.yml/badge.svg" alt="linux clang build" style="pointer-events: none;" class="inline"/> <img src="https://github.com/bartekprtc/rito/actions/workflows/windows_cl.yml/badge.svg" alt="windows build" style="pointer-events: none;" class="inline"/></p>
 <h1><a class="anchor" id="autotoc_md1"></a>
 Overview</h1>
 <p>Rito is a simple, crossplatform (Windows and Linux) C++20 library interfacing with Riot services (i.e. Riot REST API and League of Legends client). It is currently in development - API changes might occur at some point. Rito uses <a href="https://github.com/pocoproject/poco">POCO</a> library in the backend. It offers a few classes which handle communication with Riot REST API, as well as with LoL client (LCU). For League client, Rito supports both REST API and Websocket communication.</p>
@@ -97,9 +97,11 @@ Windows</h3>
 <div class="line">&gt; cmake --build build -t install</div>
 </div><!-- fragment --><h3><a class="anchor" id="autotoc_md6"></a>
 Linux</h3>
-<p>You'll need <code>gcc</code> 13, <code>cmake</code>, <code>ninja</code> and <code>poco</code> library. Install dependencies:</p>
+<p>You'll need <code>gcc</code> or <code>clang</code>, <code>cmake</code>, <code>ninja</code> and <code>poco</code> library. Install dependencies:</p>
 <p>Ubuntu/Debian:</p>
 <div class="fragment"><div class="line">$ sudo apt install gcc cmake ninja-build libpoco-dev</div>
+</div><!-- fragment --><p>or</p>
+<div class="fragment"><div class="line">$ sudo apt install clang cmake ninja-build libpoco-dev</div>
 </div><!-- fragment --><p>Clone repo and build Rito:</p>
 <div class="fragment"><div class="line">$ git clone git@github.com:bartekprtc/rito.git</div>
 <div class="line">$ cd rito</div>
@@ -109,7 +111,7 @@ Linux</h3>
 <div class="fragment"><div class="line">$ sudo cmake --build build -t install</div>
 </div><!-- fragment --><h2><a class="anchor" id="autotoc_md7"></a>
 Detailed build guide</h2>
-<p>Rito uses cmake as a build system. It can be built with gcc-13 on Linux and with msvc on Windows. It depends on Poco library (with SSL). For details, see <a href="https://github.com/bartekprtc/rito/wiki/Building-Rito">Building Rito</a> wiki page.</p>
+<p>Rito uses cmake as a build system. It can be built with gcc or clang on Linux and with msvc on Windows. It depends on Poco library (with SSL). For details, see <a href="https://github.com/bartekprtc/rito/wiki/Building-Rito">Building Rito</a> wiki page.</p>
 <h1><a class="anchor" id="autotoc_md8"></a>
 Usage</h1>
 <p>Rito can be either installed on the system, or integrated within cmake project. See <a href="https://github.com/bartekprtc/rito/wiki/Using-Rito">Using Rito</a> wiki page for more information on how to use the library and <a href="https://github.com/bartekprtc/rito/wiki/Docs">Docs</a> wiki page for some brief overview of classes.</p>
