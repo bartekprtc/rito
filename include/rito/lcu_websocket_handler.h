@@ -38,6 +38,11 @@ public:
     Lcu_websocket_handler();
     ~Lcu_websocket_handler();
 
+    Lcu_websocket_handler(const Lcu_websocket_handler&) = delete;
+    Lcu_websocket_handler(Lcu_websocket_handler&&) = delete;
+    auto operator=(const Lcu_websocket_handler&) -> Lcu_websocket_handler& = delete;
+    auto operator=(Lcu_websocket_handler&&) -> Lcu_websocket_handler& = delete;
+
     /**
      * @brief Starts internal polling loop. Will not return unless stop() is called from another
      *   thread.
@@ -116,11 +121,11 @@ public:
      *
      * This method should be called from separate thread.
      */
-    bool send_message(std::string_view message) noexcept;
+    auto send_message(std::string_view message) noexcept -> bool;
 
 private:
     void reconnect();
-    bool is_connected();
+    auto is_connected() -> bool;
 
     void notify_connection_state_changed(bool connected);
     void receive_message();
@@ -128,7 +133,6 @@ private:
 
     void main_loop();
 
-private:
     std::unique_ptr<Https_websocket_client> m_websocket;
     std::mutex m_socket_mutex;
 

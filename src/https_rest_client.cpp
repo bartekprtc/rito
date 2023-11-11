@@ -18,17 +18,17 @@ using Poco::Net::HTTPMessage;
 using Poco::Net::HTTPRequest;
 using Poco::Net::HTTPResponse;
 
-Https_rest_client::Https_rest_client(const std::string& host, std::uint16_t port)
-  : m_host{host},
+Https_rest_client::Https_rest_client(std::string host, std::uint16_t port)
+  : m_host{std::move(host)},
     m_port{port},
     m_context{new Context(Context::TLS_CLIENT_USE, "", "", "", Context::VERIFY_NONE)},
     m_session{m_host, m_port, m_context}
 {
 }
 
-Http_response Https_rest_client::request(Request_type type,
-                                         const std::string& path_and_query,
-                                         const Key_value_map& headers)
+auto Https_rest_client::request(Request_type type,
+                                const std::string& path_and_query,
+                                const Key_value_map& headers) -> Http_response
 {
     send_request(to_poco_request_type(type), path_and_query, headers);
 
@@ -36,10 +36,10 @@ Http_response Https_rest_client::request(Request_type type,
 }
 
 void Https_rest_client::send_request(const std::string& type,
-                                     const std::string& pathAndQuery,
+                                     const std::string& path_and_query,
                                      const Key_value_map& headers)
 {
-    HTTPRequest request(type, pathAndQuery, HTTPMessage::HTTP_1_1);
+    HTTPRequest request(type, path_and_query, HTTPMessage::HTTP_1_1);
     request.setHost(m_host, m_port);
     request.setKeepAlive(true);
 
@@ -56,7 +56,7 @@ void Https_rest_client::send_request(const std::string& type,
     m_session.sendRequest(request);
 }
 
-Http_response Https_rest_client::receive_response()
+auto Https_rest_client::receive_response() -> Http_response
 {
     try
     {
@@ -77,7 +77,7 @@ Http_response Https_rest_client::receive_response()
     throw Unknown_exception{"HttpsRestClient: Unexpected error while receiving message"};
 }
 
-std::string to_poco_request_type(Request_type type)
+auto to_poco_request_type(Request_type type) -> std::string
 {
     switch (type)
     {

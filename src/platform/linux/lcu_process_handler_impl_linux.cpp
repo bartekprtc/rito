@@ -11,11 +11,11 @@
 namespace rito {
 
 Lcu_process_handler_impl::Lcu_process_handler_impl(std::filesystem::path proc_dir)
-  : m_proc_dir{proc_dir}
+  : m_proc_dir{std::move(proc_dir)}
 {
 }
 
-Lcu_parameters Lcu_process_handler_impl::get_lcu_process_parameters()
+auto Lcu_process_handler_impl::get_lcu_process_parameters() -> Lcu_parameters
 {
     std::string lcu_command{get_lcu_process_command()};
 
@@ -25,14 +25,14 @@ Lcu_parameters Lcu_process_handler_impl::get_lcu_process_parameters()
     return {remoting_auth_token, static_cast<uint16_t>(std::stoi(app_port))};
 }
 
-std::string Lcu_process_handler_impl::get_lcu_process_command()
+auto Lcu_process_handler_impl::get_lcu_process_command() -> std::string
 {
     try
     {
         for (const auto& dir : std::filesystem::directory_iterator(m_proc_dir))
         {
             std::string_view proc_id{dir.path().stem().c_str()};
-            if (!is_integer(proc_id))
+            if (!is_positive_integer(proc_id))
             {
                 continue;
             }

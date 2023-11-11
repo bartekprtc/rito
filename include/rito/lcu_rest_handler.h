@@ -29,6 +29,11 @@ public:
     Lcu_rest_handler();
     ~Lcu_rest_handler();
 
+    Lcu_rest_handler(const Lcu_rest_handler&) = delete;
+    Lcu_rest_handler(Lcu_rest_handler&&) = delete;
+    auto operator=(const Lcu_rest_handler&) -> Lcu_rest_handler& = delete;
+    auto operator=(Lcu_rest_handler&&) -> Lcu_rest_handler& = delete;
+
     /**
      * @brief Executes REST request synchronously.
      *
@@ -58,7 +63,7 @@ public:
      * If there is some error while sending request to the server or receiving response, either
      *   Message_exception or Unknown_exception is thrown (depending on source of error).
      */
-    Http_response request(Request_type type, const std::string& message);
+    auto request(Request_type type, const std::string& message) -> Http_response;
 
 private:
     void attempt_reconnect();

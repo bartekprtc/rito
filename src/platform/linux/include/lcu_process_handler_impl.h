@@ -11,12 +11,11 @@ class Lcu_process_handler_impl
 {
 public:
     Lcu_process_handler_impl(std::filesystem::path proc_dir);
-    Lcu_parameters get_lcu_process_parameters();
+    auto get_lcu_process_parameters() -> Lcu_parameters;
 
 private:
-    std::string get_lcu_process_command();
+    auto get_lcu_process_command() -> std::string;
 
-private:
     std::filesystem::path m_proc_dir;
 };
 

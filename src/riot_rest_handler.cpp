@@ -8,16 +8,16 @@
 
 namespace rito {
 
-std::string get_host_by_region(Region region);
+auto get_host_by_region(Region region) -> std::string;
 
-Riot_rest_handler::Riot_rest_handler(const std::string& api_key)
-  : m_region{Region::none}, m_api_key{api_key}
+Riot_rest_handler::Riot_rest_handler(std::string api_key)
+  : m_region{Region::none}, m_api_key{std::move(api_key)}
 {
 }
 
-Riot_rest_handler::~Riot_rest_handler() {}
+Riot_rest_handler::~Riot_rest_handler() = default;
 
-Http_response Riot_rest_handler::request(Request_type type, const std::string& message)
+auto Riot_rest_handler::request(Request_type type, const std::string& message) -> Http_response
 {
     if (m_client)
     {
@@ -40,7 +40,7 @@ Http_response Riot_rest_handler::request(Request_type type, const std::string& m
     throw Unknown_exception{"Unexpected error"};
 }
 
-Http_response Riot_rest_handler::send_request(Request_type type, const std::string& message)
+auto Riot_rest_handler::send_request(Request_type type, const std::string& message) -> Http_response
 {
     Key_value_map credentials;
     credentials.emplace("X-Riot-Token", m_api_key);
@@ -57,7 +57,7 @@ void Riot_rest_handler::attempt_reconnect()
     m_client = std::make_unique<Https_rest_client>(get_host_by_region(m_region));
 }
 
-std::string get_host_by_region(Region region)
+auto get_host_by_region(Region region) -> std::string
 {
     switch (region)
     {

@@ -6,6 +6,7 @@
 #include <chrono>
 #include <iostream>
 #include <stdexcept>
+#include <utility>
 
 namespace rito {
 
@@ -58,7 +59,7 @@ void Lcu_websocket_handler::reconnect()
     }
 }
 
-bool Lcu_websocket_handler::is_connected()
+auto Lcu_websocket_handler::is_connected() -> bool
 {
     std::lock_guard<std::mutex> socketLock{m_socket_mutex};
     return m_websocket && m_websocket->is_connected();
@@ -140,20 +141,20 @@ void Lcu_websocket_handler::main_loop()
 
 void Lcu_websocket_handler::register_message_callback(Message_callback on_message_received) noexcept
 {
-    m_on_message_received = on_message_received;
+    m_on_message_received = std::move(on_message_received);
 }
 
 void Lcu_websocket_handler::register_on_connected_callback(Connection_callback on_connected) noexcept
 {
-    m_on_connected = on_connected;
+    m_on_connected = std::move(on_connected);
 }
 
 void Lcu_websocket_handler::register_on_disconnected_callback(Connection_callback on_disconnected) noexcept
 {
-    m_on_disconnected = on_disconnected;
+    m_on_disconnected = std::move(on_disconnected);
 }
 
-bool Lcu_websocket_handler::send_message(std::string_view message) noexcept
+auto Lcu_websocket_handler::send_message(std::string_view message) noexcept -> bool
 {
     if (is_connected())
     {

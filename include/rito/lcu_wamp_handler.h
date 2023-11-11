@@ -180,7 +180,7 @@ public:
      * This method should be called from separate thread.
      */
     template <Convertible_to_string... Args>
-    bool call(const std::string& id, const std::string& function, Args&&... args) noexcept;
+    auto call(const std::string& identifier, const std::string& function, Args&&... args) noexcept -> bool;
 
     /**
      * @brief Sends message of WAMP type CALL (without arguments) to the LCU (if it's connected).
@@ -198,7 +198,7 @@ public:
      *
      * This method should be called from separate thread.
      */
-    bool call(const std::string& id, const std::string& function) noexcept;
+    auto call(const std::string& identifier, const std::string& function) noexcept -> bool;
 
     /**
      * @brief Sends message of WAMP type SUBSCRIBE to the LCU (if it's connected).
@@ -218,7 +218,7 @@ public:
      * @note Subscription information is lost between sessions. If LCU is disconnected from and
      *   then connected to again, you'll need to subscribe to your events again.
      */
-    bool subscribe(const std::string& event) noexcept;
+    auto subscribe(const std::string& event) noexcept -> bool;
 
     /**
      * @brief Sends message of WAMP type UNSUBSCRIBE to the LCU (if it's connected).
@@ -235,7 +235,7 @@ public:
      *
      * This method should be called from separate thread.
      */
-    bool unsubscribe(const std::string& event) noexcept;
+    auto unsubscribe(const std::string& event) noexcept -> bool;
 
 private:
     void on_connected();
@@ -245,12 +245,11 @@ private:
     void dispatch_message(const std::string& message);
 
     void on_event(const std::string& event, const std::string& json_data);
-    void on_call_result(const std::string& id, const std::string& json_data);
-    void on_call_error(const std::string& id,
+    void on_call_result(const std::string& identifier, const std::string& json_data);
+    void on_call_error(const std::string& identifier,
                        const std::string& error,
                        const std::string& error_description);
 
-private:
     bool m_is_connected;
 
     Lcu_websocket_handler m_lcu_websocket_handler;
@@ -263,14 +262,14 @@ private:
 };
 
 template <Convertible_to_string... Args>
-bool Lcu_wamp_handler::call(const std::string& id, const std::string& function, Args&&... args) noexcept
+auto Lcu_wamp_handler::call(const std::string& identifier, const std::string& function, Args&&... args) noexcept -> bool
 {
     std::string argument_list{((", \""s + args + "\""s) + ...)}; // Produces: , "a", "b", "c"
 
     return m_lcu_websocket_handler.send_message(
-      std::format("[{}, \"{}\", \"{}\"{}]",
+      std::format(R"([{}, "{}", "{}"{}])",
                   static_cast<int>(Wamp_message_type::call),
-                  id,
+                  identifier,
                   function,
                   argument_list));
 }

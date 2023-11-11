@@ -44,6 +44,11 @@ public:
     Lcu_process_handler(std::filesystem::path proc_dir = "/proc");
     ~Lcu_process_handler();
 
+    Lcu_process_handler(const Lcu_process_handler&) = delete;
+    Lcu_process_handler(Lcu_process_handler&&) = delete;
+    auto operator=(const Lcu_process_handler&) -> Lcu_process_handler& = delete;
+    auto operator=(Lcu_process_handler&&) -> Lcu_process_handler& = delete;
+
     /**
      * @brief Obtains connection parameters of running LCU process.
      *
@@ -64,7 +69,7 @@ public:
      *   If process directory could not be found (e.g., Lcu_process_handler was created with
      *   incorrect parameter), Path_not_found_exception is thrown.
      */
-    Lcu_parameters get_lcu_process_parameters();
+    auto get_lcu_process_parameters() -> Lcu_parameters;
 
 private:
     std::unique_ptr<Lcu_process_handler_impl> m_pimpl;

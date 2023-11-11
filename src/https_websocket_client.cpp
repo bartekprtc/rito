@@ -15,8 +15,8 @@
 namespace rito {
 
 namespace {
-std::uint32_t max_frame_size{65536};
-std::uint8_t max_frames_per_message{255};
+constexpr std::uint32_t max_frame_size{65536};
+constexpr std::uint8_t max_frames_per_message{255};
 }
 
 using namespace std::literals::string_literals;
@@ -26,9 +26,9 @@ using Poco::Net::HTTPMessage;
 using Poco::Net::HTTPRequest;
 using Poco::Net::WebSocket;
 
-Https_websocket_client::Https_websocket_client(const std::string& host, std::uint16_t port)
+Https_websocket_client::Https_websocket_client(std::string host, std::uint16_t port)
   : m_connected{false},
-    m_host{host},
+    m_host{std::move(host)},
     m_port{port},
     m_context{new Context(Context::TLS_CLIENT_USE, "", "", "", Context::VERIFY_NONE)},
     m_session{m_host, m_port, m_context},
@@ -49,7 +49,7 @@ void Https_websocket_client::set_credentials(const std::string& username,
     m_credentials.authenticate(m_request);
 }
 
-bool Https_websocket_client::is_connected()
+auto Https_websocket_client::is_connected() const -> bool
 {
     return m_connected;
 }
@@ -85,18 +85,18 @@ void Https_websocket_client::stop()
     m_websocket.reset();
 }
 
-bool Https_websocket_client::send_message(std::string_view message)
+auto Https_websocket_client::send_message(std::string_view message) -> bool
 {
     if (m_websocket)
     {
-        m_websocket->sendFrame(message.data(), message.size(), WebSocket::FRAME_TEXT);
+        m_websocket->sendFrame(message.data(), static_cast<int>(message.size()), WebSocket::FRAME_TEXT);
         return true;
     }
 
     return false;
 }
 
-Poco::Buffer<char> Https_websocket_client::receive_message()
+auto Https_websocket_client::receive_message() -> Poco::Buffer<char>
 {
     if (m_websocket)
     {

@@ -45,8 +45,13 @@ public:
      * @param api_key - Riot API key. Can be either development API key or application-specific
      *                      API key.
      */
-    Riot_rest_handler(const std::string& api_key);
+    Riot_rest_handler(std::string api_key);
     ~Riot_rest_handler();
+
+    Riot_rest_handler(const Riot_rest_handler&) = delete;
+    Riot_rest_handler(Riot_rest_handler&&) = delete;
+    auto operator=(const Riot_rest_handler&) -> Riot_rest_handler& = delete;
+    auto operator=(Riot_rest_handler&&) -> Riot_rest_handler& = delete;
 
     /**
      * @brief Sets region. Required to use REST communication.
@@ -80,13 +85,12 @@ public:
      * If there is some error while sending request to the server or receiving response, either
      *   Message_exception or Unknown_exception is thrown (depending on source of error).
      */
-    Http_response request(Request_type type, const std::string& message);
+    auto request(Request_type type, const std::string& message) -> Http_response;
 
 private:
-    Http_response send_request(Request_type type, const std::string& message);
+    auto send_request(Request_type type, const std::string& message) -> Http_response;
     void attempt_reconnect();
 
-private:
     Region m_region;
     std::string m_api_key;
     std::unique_ptr<Https_rest_client> m_client;

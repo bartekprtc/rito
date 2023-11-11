@@ -9,11 +9,11 @@
 
 namespace rito {
 
-Lcu_rest_handler::Lcu_rest_handler() {}
+Lcu_rest_handler::Lcu_rest_handler() = default;
 
-Lcu_rest_handler::~Lcu_rest_handler() {}
+Lcu_rest_handler::~Lcu_rest_handler() = default;
 
-Http_response Lcu_rest_handler::request(Request_type type, const std::string& message)
+auto Lcu_rest_handler::request(Request_type type, const std::string& message) -> Http_response
 {
     if (m_client)
     {

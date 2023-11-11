@@ -1,1 +1,1 @@
-Checks: '-*,bugprone-*,cert-*,clang-analyzer-*,concurrency-*,cppcoreguidelines-*,modernize-*,performance-*,portability-*,readability-*'
+Checks: '-*,bugprone-*,cert-*,clang-analyzer-*,concurrency-*,cppcoreguidelines-*,modernize-*,performance-*,portability-*,readability-*,-bugprone-easily-swappable-parameters,-readability-redundant-access-specifier,-readability-implicit-bool-conversion'
