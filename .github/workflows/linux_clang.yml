@@ -27,6 +27,8 @@ jobs:
         sudo apt install -y clang-16 llvm-16
         sudo update-alternatives --install /usr/bin/clang clang /usr/bin/clang-16 100
         sudo update-alternatives --set clang /usr/bin/clang-16
+        sudo update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-16 100
+        sudo update-alternatives --set clang++ /usr/bin/clang++-16
         sudo update-alternatives --install /usr/bin/llvm-cov llvm-cov /usr/bin/llvm-cov-16 100
         sudo update-alternatives --install /usr/bin/asan_symbolize asan_symbolize /usr/bin/asan_symbolize-16 100
 
