@@ -9,6 +9,7 @@
 
 #include <format>
 #include <iostream>
+#include <iterator>
 
 namespace rito {
 
@@ -63,7 +64,7 @@ Http_response Https_rest_client::receive_response()
         auto& response_stream{m_session.receiveResponse(response)};
 
         Http_response res{.status = response.getStatus(), .reason = response.getReason()};
-        response_stream >> res.response;
+        res.response = std::string(std::istreambuf_iterator<char>(response_stream), {});
 
         return res;
     }

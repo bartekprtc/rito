@@ -119,8 +119,10 @@ void Lcu_websocket_handler::main_loop()
     {
         if (m_stop)
         {
-            std::lock_guard<std::mutex> socket_lock{m_socket_mutex};
-            m_websocket.reset();
+            {
+                std::lock_guard<std::mutex> socket_lock{m_socket_mutex};
+                m_websocket.reset();
+            }
             notify_connection_state_changed(false);
             break;
         }

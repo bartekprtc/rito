@@ -188,4 +188,12 @@ void Lcu_wamp_handler::on_call_error(const std::string& id,
     }
 }
 
+bool Lcu_wamp_handler::call(const std::string& id, const std::string& function) noexcept
+{
+    return m_lcu_websocket_handler.send_message(
+      std::format("[{}, \"{}\", \"{}\"]",
+                  static_cast<int>(Wamp_message_type::call),
+                  id,
+                  function));
+}
 } // namespace rito

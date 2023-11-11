@@ -115,10 +115,6 @@ public:
      *   called, there is no connection to LCU. Messages are not queued.
      *
      * This method should be called from separate thread.
-     *
-     * @note Do not call this method from callback functions registered for LCU connected and LCU
-     *   disconnected events (via register_on_connected_callback() and
-     *   register_on_disconnected_callback() methods). This will cause a deadlock.
      */
     bool send_message(std::string_view message) noexcept;
 

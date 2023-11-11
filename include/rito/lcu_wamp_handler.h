@@ -162,7 +162,7 @@ public:
     void stop() noexcept;
 
     /**
-     * @brief Sends message of WAMP type CALL to the LCU (if it's connected).
+     * @brief Sends message of WAMP type CALL (with arguments) to the LCU (if it's connected).
      *
      * @param id - ID of the CALL request. If response is received, it will have the same ID.
      * @param function - LCU function to be invoked.
@@ -178,13 +178,27 @@ public:
      *   called, there is no connection to LCU. Messages are not queued.
      *
      * This method should be called from separate thread.
-     *
-     * @note Do not call this method from callback functions registered for LCU connected and LCU
-     *   disconnected events (via register_on_connected_callback() and
-     *   register_on_disconnected_callback() methods). This will cause a deadlock.
      */
     template <Convertible_to_string... Args>
     bool call(const std::string& id, const std::string& function, Args&&... args) noexcept;
+
+    /**
+     * @brief Sends message of WAMP type CALL (without arguments) to the LCU (if it's connected).
+     *
+     * @param id - ID of the CALL request. If response is received, it will have the same ID.
+     * @param function - LCU function to be invoked.
+     *
+     * @return true if message is sent successfully, false otherwise.
+     *
+     * This method sends message to LCU formatted as WAMP CALL message. Expected response is either
+     *   CALL.RESULT or CALL.ERROR, depending on whether CALL is successful.
+     *
+     * This method should be called only if another thread has called run(). If run() was not
+     *   called, there is no connection to LCU. Messages are not queued.
+     *
+     * This method should be called from separate thread.
+     */
+    bool call(const std::string& id, const std::string& function) noexcept;
 
     /**
      * @brief Sends message of WAMP type SUBSCRIBE to the LCU (if it's connected).
@@ -200,10 +214,6 @@ public:
      *   called, there is no connection to LCU. Messages are not queued.
      *
      * This method should be called from separate thread.
-     *
-     * @note Do not call this method from callback functions registered for LCU connected and LCU
-     *   disconnected events (via register_on_connected_callback() and
-     *   register_on_disconnected_callback() methods). This will cause a deadlock.
      *
      * @note Subscription information is lost between sessions. If LCU is disconnected from and
      *   then connected to again, you'll need to subscribe to your events again.
@@ -224,10 +234,6 @@ public:
      *   called, there is no connection to LCU. Messages are not queued.
      *
      * This method should be called from separate thread.
-     *
-     * @note Do not call this method from callback functions registered for LCU connected and LCU
-     *   disconnected events (via register_on_connected_callback() and
-     *   register_on_disconnected_callback() methods). This will cause a deadlock.
      */
     bool unsubscribe(const std::string& event) noexcept;
 
