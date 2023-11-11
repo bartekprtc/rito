@@ -8,7 +8,6 @@
 #include <libloaderapi.h>
 #include <psapi.h>
 
-#include <format>
 #include <functional>
 #include <iostream>
 #include <regex>

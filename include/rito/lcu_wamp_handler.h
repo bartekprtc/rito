@@ -11,7 +11,6 @@
 #include "lcu_websocket_handler.h"
 
 #include <concepts>
-#include <format>
 #include <iostream>
 #include <string>
 #include <string_view>
@@ -33,6 +32,7 @@ enum class Wamp_message_type
     unsubscribe = 6,
     event = 8
 };
+
 // @endcond
 
 /**
@@ -180,7 +180,8 @@ public:
      * This method should be called from separate thread.
      */
     template <Convertible_to_string... Args>
-    auto call(const std::string& identifier, const std::string& function, Args&&... args) noexcept -> bool;
+    auto call(const std::string& identifier, const std::string& function, Args&&... args) noexcept
+      -> bool;
 
     /**
      * @brief Sends message of WAMP type CALL (without arguments) to the LCU (if it's connected).
@@ -262,16 +263,16 @@ private:
 };
 
 template <Convertible_to_string... Args>
-auto Lcu_wamp_handler::call(const std::string& identifier, const std::string& function, Args&&... args) noexcept -> bool
+auto Lcu_wamp_handler::call(const std::string& identifier,
+                            const std::string& function,
+                            Args&&... args) noexcept -> bool
 {
     std::string argument_list{((", \""s + args + "\""s) + ...)}; // Produces: , "a", "b", "c"
 
-    return m_lcu_websocket_handler.send_message(
-      std::format(R"([{}, "{}", "{}"{}])",
-                  static_cast<int>(Wamp_message_type::call),
-                  identifier,
-                  function,
-                  argument_list));
+    std::string message{"["s + std::to_string(static_cast<int>(Wamp_message_type::call)) + ", \"" +
+                        identifier + "\", \"" + function + "\"" + argument_list + "]"};
+
+    return m_lcu_websocket_handler.send_message(message);
 }
 
 } // namespace rito

@@ -7,9 +7,10 @@
 #include <Poco/Net/HTTPResponse.h>
 #include <Poco/Net/NetException.h>
 
-#include <format>
 #include <iostream>
 #include <iterator>
+
+using namespace std::literals::string_literals;
 
 namespace rito {
 
@@ -70,8 +71,7 @@ auto Https_rest_client::receive_response() -> Http_response
     }
     catch (Poco::Net::MessageException& e)
     {
-        throw Message_exception{
-          std::format("Unable to receive message from the server({})", e.what())};
+        throw Message_exception{"Unable to receive message from the server ("s + e.what() + ")"};
     }
 
     throw Unknown_exception{"HttpsRestClient: Unexpected error while receiving message"};

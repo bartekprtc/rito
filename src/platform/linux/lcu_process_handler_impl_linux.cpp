@@ -3,10 +3,11 @@
 #include "exception.h"
 #include "lcu_process_handler_helpers.h"
 
-#include <format>
 #include <cctype>
 #include <filesystem>
 #include <fstream>
+
+using namespace std::literals::string_literals;
 
 namespace rito {
 
@@ -48,7 +49,7 @@ auto Lcu_process_handler_impl::get_lcu_process_command() -> std::string
     }
     catch (std::filesystem::filesystem_error& e)
     {
-        throw Path_not_found_exception{std::format("Unable to locate {} folder", m_proc_dir.string())};
+        throw Path_not_found_exception{"Unable to locate "s + m_proc_dir.string() + " folder"};
     }
 
     throw Lcu_not_running_exception("Unable to find League Client process");
