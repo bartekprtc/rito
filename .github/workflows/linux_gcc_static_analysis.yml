@@ -15,9 +15,26 @@ jobs:
       with:
         submodules: false
 
-    - name: Install ninja, dependencies (Poco), clang
+    - name: Install ninja, dependencies (Poco)
       shell: bash
       run: sudo apt install ninja-build libpoco-dev
+
+    - name: Install LLVM 16 (for clang-tidy-16)
+      shell: bash
+      run: |
+        wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add -
+        sudo apt-add-repository "deb http://apt.llvm.org/jammy/ llvm-toolchain-jammy-16 main"
+        sudo apt update
+        sudo apt install llvm-16 llvm-16-dev llvm-16-tools clang-16 clang-tidy-16 clang-tools-16 \
+          libclang-16-dev libflac-dev libsdl2-dev libsdl2-ttf-dev libsdl2-image-dev libsdl2-mixer-dev \
+          libpulse-dev ccache gettext jq
+
+    - name: Ensure clang-tidy point to LLVM 16
+      shell: bash
+      run: |
+          mkdir ~/llvm-command-override
+          ln -s /usr/bin/clang-tidy-16 ~/llvm-command-override/clang-tidy
+          echo "$HOME/llvm-command-override" >> $GITHUB_PATH
 
     - name: Configure CMake for static analysis
       shell: cmake -P {0}
