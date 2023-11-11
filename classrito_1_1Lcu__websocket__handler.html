@@ -81,6 +81,18 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:a84238dbeca8d306ac356a460dc464734"><td class="memItemLeft" align="right" valign="top"><a id="a84238dbeca8d306ac356a460dc464734"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Lcu_websocket_handler</b> (const <a class="el" href="classrito_1_1Lcu__websocket__handler.html">Lcu_websocket_handler</a> &amp;)=delete</td></tr>
+<tr class="separator:a84238dbeca8d306ac356a460dc464734"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a11416cf36789fa794fff3328e2b28c40"><td class="memItemLeft" align="right" valign="top"><a id="a11416cf36789fa794fff3328e2b28c40"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Lcu_websocket_handler</b> (<a class="el" href="classrito_1_1Lcu__websocket__handler.html">Lcu_websocket_handler</a> &amp;&amp;)=delete</td></tr>
+<tr class="separator:a11416cf36789fa794fff3328e2b28c40"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add3dd2d93c1cc4940b13e75f13eb36c4"><td class="memItemLeft" align="right" valign="top"><a id="add3dd2d93c1cc4940b13e75f13eb36c4"></a>
+auto&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const <a class="el" href="classrito_1_1Lcu__websocket__handler.html">Lcu_websocket_handler</a> &amp;) -&gt; <a class="el" href="classrito_1_1Lcu__websocket__handler.html">Lcu_websocket_handler</a> &amp;=delete</td></tr>
+<tr class="separator:add3dd2d93c1cc4940b13e75f13eb36c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae58c336d073286d6f17ae4aea48fcb75"><td class="memItemLeft" align="right" valign="top"><a id="ae58c336d073286d6f17ae4aea48fcb75"></a>
+auto&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (<a class="el" href="classrito_1_1Lcu__websocket__handler.html">Lcu_websocket_handler</a> &amp;&amp;) -&gt; <a class="el" href="classrito_1_1Lcu__websocket__handler.html">Lcu_websocket_handler</a> &amp;=delete</td></tr>
+<tr class="separator:ae58c336d073286d6f17ae4aea48fcb75"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1c56976b4fca8f90a52f8cb0da415b15"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrito_1_1Lcu__websocket__handler.html#a1c56976b4fca8f90a52f8cb0da415b15">run</a> () noexcept</td></tr>
 <tr class="memdesc:a1c56976b4fca8f90a52f8cb0da415b15"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts internal polling loop. Will not return unless <a class="el" href="classrito_1_1Lcu__websocket__handler.html#a452edaee138c5ea31fdecffc87fb6463" title="Stops internal loop. Drops LCU connection (if such connection was established).">stop()</a> is called from another thread.  <a href="classrito_1_1Lcu__websocket__handler.html#a1c56976b4fca8f90a52f8cb0da415b15">More...</a><br /></td></tr>
 <tr class="separator:a1c56976b4fca8f90a52f8cb0da415b15"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -96,9 +108,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a6dc6553d33b19d2a14b7106f298137ef"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrito_1_1Lcu__websocket__handler.html#a6dc6553d33b19d2a14b7106f298137ef">register_on_disconnected_callback</a> (<a class="el" href="namespacerito.html#a1778ee7a785dccf226a5dc2f28a46ccb">Connection_callback</a> on_disconnected) noexcept</td></tr>
 <tr class="memdesc:a6dc6553d33b19d2a14b7106f298137ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registers callback function for LCU disconnected event.  <a href="classrito_1_1Lcu__websocket__handler.html#a6dc6553d33b19d2a14b7106f298137ef">More...</a><br /></td></tr>
 <tr class="separator:a6dc6553d33b19d2a14b7106f298137ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a970b9d4977376c471eab08a33dcdee61"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrito_1_1Lcu__websocket__handler.html#a970b9d4977376c471eab08a33dcdee61">send_message</a> (std::string_view message) noexcept</td></tr>
-<tr class="memdesc:a970b9d4977376c471eab08a33dcdee61"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends message over websocket to LCU.  <a href="classrito_1_1Lcu__websocket__handler.html#a970b9d4977376c471eab08a33dcdee61">More...</a><br /></td></tr>
-<tr class="separator:a970b9d4977376c471eab08a33dcdee61"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a42b6a117250c1c063bfb19b1eb87c0bb"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrito_1_1Lcu__websocket__handler.html#a42b6a117250c1c063bfb19b1eb87c0bb">send_message</a> (std::string_view message) noexcept -&gt; bool</td></tr>
+<tr class="memdesc:a42b6a117250c1c063bfb19b1eb87c0bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends message over websocket to LCU.  <a href="classrito_1_1Lcu__websocket__handler.html#a42b6a117250c1c063bfb19b1eb87c0bb">More...</a><br /></td></tr>
+<tr class="separator:a42b6a117250c1c063bfb19b1eb87c0bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Handler for websocket communication with LCU (League of Legends client). </p>
@@ -107,7 +119,7 @@ Public Member Functions</h2></td></tr>
 <li>Disconnected from LCU</li>
 <li>Message (event) received</li>
 </ul>
-<p>This class requires at least two threads: one for running the internal loop by calling <a class="el" href="classrito_1_1Lcu__websocket__handler.html#a1c56976b4fca8f90a52f8cb0da415b15" title="Starts internal polling loop. Will not return unless stop() is called from another thread.">run()</a> and the other one for sending messages (via <a class="el" href="classrito_1_1Lcu__websocket__handler.html#a970b9d4977376c471eab08a33dcdee61" title="Sends message over websocket to LCU.">send_message()</a>) and stopping the loop (via <a class="el" href="classrito_1_1Lcu__websocket__handler.html#a452edaee138c5ea31fdecffc87fb6463" title="Stops internal loop. Drops LCU connection (if such connection was established).">stop()</a>) if necessary. </p>
+<p>This class requires at least two threads: one for running the internal loop by calling <a class="el" href="classrito_1_1Lcu__websocket__handler.html#a1c56976b4fca8f90a52f8cb0da415b15" title="Starts internal polling loop. Will not return unless stop() is called from another thread.">run()</a> and the other one for sending messages (via <a class="el" href="classrito_1_1Lcu__websocket__handler.html#a42b6a117250c1c063bfb19b1eb87c0bb" title="Sends message over websocket to LCU.">send_message()</a>) and stopping the loop (via <a class="el" href="classrito_1_1Lcu__websocket__handler.html#a452edaee138c5ea31fdecffc87fb6463" title="Stops internal loop. Drops LCU connection (if such connection was established).">stop()</a>) if necessary. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="abb2a39aa671ad9a85cc390dc762a114c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#abb2a39aa671ad9a85cc390dc762a114c">&#9670;&nbsp;</a></span>register_message_callback()</h2>
@@ -246,8 +258,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a970b9d4977376c471eab08a33dcdee61"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a970b9d4977376c471eab08a33dcdee61">&#9670;&nbsp;</a></span>send_message()</h2>
+<a id="a42b6a117250c1c063bfb19b1eb87c0bb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a42b6a117250c1c063bfb19b1eb87c0bb">&#9670;&nbsp;</a></span>send_message()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -256,11 +268,11 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool rito::Lcu_websocket_handler::send_message </td>
+          <td class="memname">auto rito::Lcu_websocket_handler::send_message </td>
           <td>(</td>
           <td class="paramtype">std::string_view&#160;</td>
           <td class="paramname"><em>message</em></td><td>)</td>
-          <td></td>
+          <td> -&gt;  bool</td>
         </tr>
       </table>
   </td>

@@ -102,19 +102,19 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a7a01e1f6ea9dc64e77a164a362223fdb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrito_1_1Lcu__wamp__handler.html#a7a01e1f6ea9dc64e77a164a362223fdb">stop</a> () noexcept</td></tr>
 <tr class="memdesc:a7a01e1f6ea9dc64e77a164a362223fdb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stops internal loop. Drops LCU connection (if such connection was established).  <a href="classrito_1_1Lcu__wamp__handler.html#a7a01e1f6ea9dc64e77a164a362223fdb">More...</a><br /></td></tr>
 <tr class="separator:a7a01e1f6ea9dc64e77a164a362223fdb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad8cacbd983b5b168d60b16a1296a0a0f"><td class="memTemplParams" colspan="2">template&lt;Convertible_to_string... Args&gt; </td></tr>
-<tr class="memitem:ad8cacbd983b5b168d60b16a1296a0a0f"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrito_1_1Lcu__wamp__handler.html#ad8cacbd983b5b168d60b16a1296a0a0f">call</a> (const std::string &amp;id, const std::string &amp;function, Args &amp;&amp;... args) noexcept</td></tr>
-<tr class="memdesc:ad8cacbd983b5b168d60b16a1296a0a0f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends message of WAMP type CALL (with arguments) to the LCU (if it's connected).  <a href="classrito_1_1Lcu__wamp__handler.html#ad8cacbd983b5b168d60b16a1296a0a0f">More...</a><br /></td></tr>
-<tr class="separator:ad8cacbd983b5b168d60b16a1296a0a0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac35215d4e420060859a687968f3b26bb"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrito_1_1Lcu__wamp__handler.html#ac35215d4e420060859a687968f3b26bb">call</a> (const std::string &amp;id, const std::string &amp;function) noexcept</td></tr>
-<tr class="memdesc:ac35215d4e420060859a687968f3b26bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends message of WAMP type CALL (without arguments) to the LCU (if it's connected).  <a href="classrito_1_1Lcu__wamp__handler.html#ac35215d4e420060859a687968f3b26bb">More...</a><br /></td></tr>
-<tr class="separator:ac35215d4e420060859a687968f3b26bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8406334192c51749fd73ad54e2dfd3f5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrito_1_1Lcu__wamp__handler.html#a8406334192c51749fd73ad54e2dfd3f5">subscribe</a> (const std::string &amp;event) noexcept</td></tr>
-<tr class="memdesc:a8406334192c51749fd73ad54e2dfd3f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends message of WAMP type SUBSCRIBE to the LCU (if it's connected).  <a href="classrito_1_1Lcu__wamp__handler.html#a8406334192c51749fd73ad54e2dfd3f5">More...</a><br /></td></tr>
-<tr class="separator:a8406334192c51749fd73ad54e2dfd3f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a29053ba3fb269bc603c53a982bfc176f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrito_1_1Lcu__wamp__handler.html#a29053ba3fb269bc603c53a982bfc176f">unsubscribe</a> (const std::string &amp;event) noexcept</td></tr>
-<tr class="memdesc:a29053ba3fb269bc603c53a982bfc176f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends message of WAMP type UNSUBSCRIBE to the LCU (if it's connected).  <a href="classrito_1_1Lcu__wamp__handler.html#a29053ba3fb269bc603c53a982bfc176f">More...</a><br /></td></tr>
-<tr class="separator:a29053ba3fb269bc603c53a982bfc176f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a16070133d9d257d6a03731430172cf"><td class="memTemplParams" colspan="2">template&lt;Convertible_to_string... Args&gt; </td></tr>
+<tr class="memitem:a6a16070133d9d257d6a03731430172cf"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrito_1_1Lcu__wamp__handler.html#a6a16070133d9d257d6a03731430172cf">call</a> (const std::string &amp;identifier, const std::string &amp;function, Args &amp;&amp;... args) noexcept -&gt; bool</td></tr>
+<tr class="memdesc:a6a16070133d9d257d6a03731430172cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends message of WAMP type CALL (with arguments) to the LCU (if it's connected).  <a href="classrito_1_1Lcu__wamp__handler.html#a6a16070133d9d257d6a03731430172cf">More...</a><br /></td></tr>
+<tr class="separator:a6a16070133d9d257d6a03731430172cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d149d43748a8625e6355527b53b6de1"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrito_1_1Lcu__wamp__handler.html#a8d149d43748a8625e6355527b53b6de1">call</a> (const std::string &amp;identifier, const std::string &amp;function) noexcept -&gt; bool</td></tr>
+<tr class="memdesc:a8d149d43748a8625e6355527b53b6de1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends message of WAMP type CALL (without arguments) to the LCU (if it's connected).  <a href="classrito_1_1Lcu__wamp__handler.html#a8d149d43748a8625e6355527b53b6de1">More...</a><br /></td></tr>
+<tr class="separator:a8d149d43748a8625e6355527b53b6de1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aafb6886e55f23f512bd123f97be95adc"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrito_1_1Lcu__wamp__handler.html#aafb6886e55f23f512bd123f97be95adc">subscribe</a> (const std::string &amp;event) noexcept -&gt; bool</td></tr>
+<tr class="memdesc:aafb6886e55f23f512bd123f97be95adc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends message of WAMP type SUBSCRIBE to the LCU (if it's connected).  <a href="classrito_1_1Lcu__wamp__handler.html#aafb6886e55f23f512bd123f97be95adc">More...</a><br /></td></tr>
+<tr class="separator:aafb6886e55f23f512bd123f97be95adc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d257dd2f1a589bdd443aa33c4e55a42"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrito_1_1Lcu__wamp__handler.html#a5d257dd2f1a589bdd443aa33c4e55a42">unsubscribe</a> (const std::string &amp;event) noexcept -&gt; bool</td></tr>
+<tr class="memdesc:a5d257dd2f1a589bdd443aa33c4e55a42"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends message of WAMP type UNSUBSCRIBE to the LCU (if it's connected).  <a href="classrito_1_1Lcu__wamp__handler.html#a5d257dd2f1a589bdd443aa33c4e55a42">More...</a><br /></td></tr>
+<tr class="separator:a5d257dd2f1a589bdd443aa33c4e55a42"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Handler for LCU connection over websocket with WAMP protocol. Wrapper for <a class="el" href="classrito_1_1Lcu__websocket__handler.html" title="Handler for websocket communication with LCU (League of Legends client).">Lcu_websocket_handler</a> class. </p>
@@ -126,13 +126,13 @@ Public Member Functions</h2></td></tr>
 <li>Message received (of WAMP type EVENT).</li>
 </ul>
 <p>There are two ways (not mutually exclusive - you may use both at the same time) to use this class:</p><ul>
-<li>using <a class="el" href="classrito_1_1Lcu__wamp__handler.html#ad8cacbd983b5b168d60b16a1296a0a0f" title="Sends message of WAMP type CALL (with arguments) to the LCU (if it&#39;s connected).">call()</a> method will result in response being received either via on_call_result callback or via on_call_error callback,</li>
-<li>using <a class="el" href="classrito_1_1Lcu__wamp__handler.html#a8406334192c51749fd73ad54e2dfd3f5" title="Sends message of WAMP type SUBSCRIBE to the LCU (if it&#39;s connected).">subscribe()</a> and <a class="el" href="classrito_1_1Lcu__wamp__handler.html#a29053ba3fb269bc603c53a982bfc176f" title="Sends message of WAMP type UNSUBSCRIBE to the LCU (if it&#39;s connected).">unsubscribe()</a> to manage subscriptions will result in registered events being received via on_event callback.</li>
+<li>using <a class="el" href="classrito_1_1Lcu__wamp__handler.html#a6a16070133d9d257d6a03731430172cf" title="Sends message of WAMP type CALL (with arguments) to the LCU (if it&#39;s connected).">call()</a> method will result in response being received either via on_call_result callback or via on_call_error callback,</li>
+<li>using <a class="el" href="classrito_1_1Lcu__wamp__handler.html#aafb6886e55f23f512bd123f97be95adc" title="Sends message of WAMP type SUBSCRIBE to the LCU (if it&#39;s connected).">subscribe()</a> and <a class="el" href="classrito_1_1Lcu__wamp__handler.html#a5d257dd2f1a589bdd443aa33c4e55a42" title="Sends message of WAMP type UNSUBSCRIBE to the LCU (if it&#39;s connected).">unsubscribe()</a> to manage subscriptions will result in registered events being received via on_event callback.</li>
 </ul>
-<p>This class requires at least two threads: one for running the internal loop by calling <a class="el" href="classrito_1_1Lcu__wamp__handler.html#a167b789af96285015dc25de1720cabe7" title="Starts internal polling loop. Will not return unless stop() is called from another thread.">run()</a> and the other one for sending messages (via <a class="el" href="classrito_1_1Lcu__wamp__handler.html#ad8cacbd983b5b168d60b16a1296a0a0f" title="Sends message of WAMP type CALL (with arguments) to the LCU (if it&#39;s connected).">call()</a>, <a class="el" href="classrito_1_1Lcu__wamp__handler.html#a8406334192c51749fd73ad54e2dfd3f5" title="Sends message of WAMP type SUBSCRIBE to the LCU (if it&#39;s connected).">subscribe()</a> and <a class="el" href="classrito_1_1Lcu__wamp__handler.html#a29053ba3fb269bc603c53a982bfc176f" title="Sends message of WAMP type UNSUBSCRIBE to the LCU (if it&#39;s connected).">unsubscribe()</a>) and stopping the loop (via <a class="el" href="classrito_1_1Lcu__wamp__handler.html#a7a01e1f6ea9dc64e77a164a362223fdb" title="Stops internal loop. Drops LCU connection (if such connection was established).">stop()</a>) if necessary. </p>
+<p>This class requires at least two threads: one for running the internal loop by calling <a class="el" href="classrito_1_1Lcu__wamp__handler.html#a167b789af96285015dc25de1720cabe7" title="Starts internal polling loop. Will not return unless stop() is called from another thread.">run()</a> and the other one for sending messages (via <a class="el" href="classrito_1_1Lcu__wamp__handler.html#a6a16070133d9d257d6a03731430172cf" title="Sends message of WAMP type CALL (with arguments) to the LCU (if it&#39;s connected).">call()</a>, <a class="el" href="classrito_1_1Lcu__wamp__handler.html#aafb6886e55f23f512bd123f97be95adc" title="Sends message of WAMP type SUBSCRIBE to the LCU (if it&#39;s connected).">subscribe()</a> and <a class="el" href="classrito_1_1Lcu__wamp__handler.html#a5d257dd2f1a589bdd443aa33c4e55a42" title="Sends message of WAMP type UNSUBSCRIBE to the LCU (if it&#39;s connected).">unsubscribe()</a>) and stopping the loop (via <a class="el" href="classrito_1_1Lcu__wamp__handler.html#a7a01e1f6ea9dc64e77a164a362223fdb" title="Stops internal loop. Drops LCU connection (if such connection was established).">stop()</a>) if necessary. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="ac35215d4e420060859a687968f3b26bb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac35215d4e420060859a687968f3b26bb">&#9670;&nbsp;</a></span>call() <span class="overload">[1/2]</span></h2>
+<a id="a8d149d43748a8625e6355527b53b6de1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8d149d43748a8625e6355527b53b6de1">&#9670;&nbsp;</a></span>call() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -141,10 +141,10 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool rito::Lcu_wamp_handler::call </td>
+          <td class="memname">auto rito::Lcu_wamp_handler::call </td>
           <td>(</td>
           <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>id</em>, </td>
+          <td class="paramname"><em>identifier</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -155,7 +155,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td></td>
+          <td></td><td> -&gt;  bool</td>
         </tr>
       </table>
   </td>
@@ -180,8 +180,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ad8cacbd983b5b168d60b16a1296a0a0f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad8cacbd983b5b168d60b16a1296a0a0f">&#9670;&nbsp;</a></span>call() <span class="overload">[2/2]</span></h2>
+<a id="a6a16070133d9d257d6a03731430172cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6a16070133d9d257d6a03731430172cf">&#9670;&nbsp;</a></span>call() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -192,10 +192,10 @@ template&lt;Convertible_to_string... Args&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool rito::Lcu_wamp_handler::call </td>
+          <td class="memname">auto rito::Lcu_wamp_handler::call </td>
           <td>(</td>
           <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>id</em>, </td>
+          <td class="paramname"><em>identifier</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -212,7 +212,7 @@ template&lt;Convertible_to_string... Args&gt; </div>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td></td>
+          <td></td><td> -&gt; bool</td>
         </tr>
       </table>
   </td>
@@ -475,8 +475,8 @@ template&lt;Convertible_to_string... Args&gt; </div>
 
 </div>
 </div>
-<a id="a8406334192c51749fd73ad54e2dfd3f5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8406334192c51749fd73ad54e2dfd3f5">&#9670;&nbsp;</a></span>subscribe()</h2>
+<a id="aafb6886e55f23f512bd123f97be95adc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aafb6886e55f23f512bd123f97be95adc">&#9670;&nbsp;</a></span>subscribe()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -485,11 +485,11 @@ template&lt;Convertible_to_string... Args&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool rito::Lcu_wamp_handler::subscribe </td>
+          <td class="memname">auto rito::Lcu_wamp_handler::subscribe </td>
           <td>(</td>
           <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>event</em></td><td>)</td>
-          <td></td>
+          <td> -&gt;  bool</td>
         </tr>
       </table>
   </td>
@@ -514,8 +514,8 @@ template&lt;Convertible_to_string... Args&gt; </div>
 
 </div>
 </div>
-<a id="a29053ba3fb269bc603c53a982bfc176f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a29053ba3fb269bc603c53a982bfc176f">&#9670;&nbsp;</a></span>unsubscribe()</h2>
+<a id="a5d257dd2f1a589bdd443aa33c4e55a42"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d257dd2f1a589bdd443aa33c4e55a42">&#9670;&nbsp;</a></span>unsubscribe()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -524,11 +524,11 @@ template&lt;Convertible_to_string... Args&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool rito::Lcu_wamp_handler::unsubscribe </td>
+          <td class="memname">auto rito::Lcu_wamp_handler::unsubscribe </td>
           <td>(</td>
           <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>event</em></td><td>)</td>
-          <td></td>
+          <td> -&gt;  bool</td>
         </tr>
       </table>
   </td>
