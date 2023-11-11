@@ -145,31 +145,29 @@ $(function() {
 <div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;                       const std::<span class="keywordtype">string</span>&amp; error,</div>
 <div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;                       const std::<span class="keywordtype">string</span>&amp; error_description);</div>
 <div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160; </div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;    <span class="keywordtype">bool</span> m_is_connected;</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;    <a class="code" href="classrito_1_1Lcu__websocket__handler.html">Lcu_websocket_handler</a> m_lcu_websocket_handler;</div>
 <div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160; </div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;    <a class="code" href="classrito_1_1Lcu__websocket__handler.html">Lcu_websocket_handler</a> m_lcu_websocket_handler;</div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160; </div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;    <a class="code" href="namespacerito.html#a1778ee7a785dccf226a5dc2f28a46ccb">Connection_callback</a> m_on_connected_callback;</div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;    <a class="code" href="namespacerito.html#a1778ee7a785dccf226a5dc2f28a46ccb">Connection_callback</a> m_on_disconnected_callback;</div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;    <a class="code" href="namespacerito.html#acfafc9c26a73a2dc3c6694bd900ddff4">Wamp_call_result_callback</a> m_on_call_result_callback;</div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;    <a class="code" href="namespacerito.html#a8d462dc69f8e52e3e2e24ee89db92e29">Wamp_call_error_callback</a> m_on_call_error_callback;</div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;    <a class="code" href="namespacerito.html#aeae2ae1c48628a0079132fe362b94c68">Wamp_event_callback</a> m_on_event_callback;</div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;};</div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160; </div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;template &lt;Convertible_to_string... Args&gt;</div>
-<div class="line"><a name="l00266"></a><span class="lineno"><a class="line" href="classrito_1_1Lcu__wamp__handler.html#a6a16070133d9d257d6a03731430172cf">  266</a></span>&#160;auto <a class="code" href="classrito_1_1Lcu__wamp__handler.html">Lcu_wamp_handler</a>::call(const std::<span class="keywordtype">string</span>&amp; identifier,</div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;                            const std::<span class="keywordtype">string</span>&amp; function,</div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;                            Args&amp;&amp;... args) noexcept -&gt; <span class="keywordtype">bool</span></div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;{</div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;    std::string argument_list{((<span class="stringliteral">&quot;, \&quot;&quot;</span>s + args + <span class="stringliteral">&quot;\&quot;&quot;</span>s) + ...)}; <span class="comment">// Produces: , &quot;a&quot;, &quot;b&quot;, &quot;c&quot;</span></div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160; </div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;    std::string message{<span class="stringliteral">&quot;[&quot;</span>s + std::to_string(<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(Wamp_message_type::call)) + <span class="stringliteral">&quot;, \&quot;&quot;</span> +</div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;                        identifier + <span class="stringliteral">&quot;\&quot;, \&quot;&quot;</span> + <span class="keyword">function</span> + <span class="stringliteral">&quot;\&quot;&quot;</span> + argument_list + <span class="stringliteral">&quot;]&quot;</span>};</div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160; </div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;    <span class="keywordflow">return</span> m_lcu_websocket_handler.<a class="code" href="classrito_1_1Lcu__websocket__handler.html#a42b6a117250c1c063bfb19b1eb87c0bb">send_message</a>(message);</div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;}</div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160; </div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;} <span class="comment">// namespace rito</span></div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;    <a class="code" href="namespacerito.html#a1778ee7a785dccf226a5dc2f28a46ccb">Connection_callback</a> m_on_connected_callback;</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;    <a class="code" href="namespacerito.html#a1778ee7a785dccf226a5dc2f28a46ccb">Connection_callback</a> m_on_disconnected_callback;</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;    <a class="code" href="namespacerito.html#acfafc9c26a73a2dc3c6694bd900ddff4">Wamp_call_result_callback</a> m_on_call_result_callback;</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;    <a class="code" href="namespacerito.html#a8d462dc69f8e52e3e2e24ee89db92e29">Wamp_call_error_callback</a> m_on_call_error_callback;</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;    <a class="code" href="namespacerito.html#aeae2ae1c48628a0079132fe362b94c68">Wamp_event_callback</a> m_on_event_callback;</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;};</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160; </div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;template &lt;Convertible_to_string... Args&gt;</div>
+<div class="line"><a name="l00264"></a><span class="lineno"><a class="line" href="classrito_1_1Lcu__wamp__handler.html#a6a16070133d9d257d6a03731430172cf">  264</a></span>&#160;auto <a class="code" href="classrito_1_1Lcu__wamp__handler.html">Lcu_wamp_handler</a>::call(const std::<span class="keywordtype">string</span>&amp; identifier,</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;                            const std::<span class="keywordtype">string</span>&amp; function,</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;                            Args&amp;&amp;... args) noexcept -&gt; <span class="keywordtype">bool</span></div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;{</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;    std::string argument_list{((<span class="stringliteral">&quot;, \&quot;&quot;</span>s + args + <span class="stringliteral">&quot;\&quot;&quot;</span>s) + ...)}; <span class="comment">// Produces: , &quot;a&quot;, &quot;b&quot;, &quot;c&quot;</span></div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160; </div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;    std::string message{<span class="stringliteral">&quot;[&quot;</span>s + std::to_string(<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(Wamp_message_type::call)) + <span class="stringliteral">&quot;, \&quot;&quot;</span> +</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;                        identifier + <span class="stringliteral">&quot;\&quot;, \&quot;&quot;</span> + <span class="keyword">function</span> + <span class="stringliteral">&quot;\&quot;&quot;</span> + argument_list + <span class="stringliteral">&quot;]&quot;</span>};</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160; </div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;    <span class="keywordflow">return</span> m_lcu_websocket_handler.<a class="code" href="classrito_1_1Lcu__websocket__handler.html#a42b6a117250c1c063bfb19b1eb87c0bb">send_message</a>(message);</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;}</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160; </div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;} <span class="comment">// namespace rito</span></div>
 <div class="ttc" id="aclassrito_1_1Lcu__wamp__handler_html"><div class="ttname"><a href="classrito_1_1Lcu__wamp__handler.html">rito::Lcu_wamp_handler</a></div><div class="ttdoc">Handler for LCU connection over websocket with WAMP protocol. Wrapper for Lcu_websocket_handler class...</div><div class="ttdef"><b>Definition:</b> lcu_wamp_handler.h:62</div></div>
 <div class="ttc" id="aclassrito_1_1Lcu__wamp__handler_html_a06e0495d5f6392f34fe6a25e169be891"><div class="ttname"><a href="classrito_1_1Lcu__wamp__handler.html#a06e0495d5f6392f34fe6a25e169be891">rito::Lcu_wamp_handler::register_on_disconnected_callback</a></div><div class="ttdeci">void register_on_disconnected_callback(Connection_callback on_disconnected) noexcept</div><div class="ttdoc">Registers callback function for LCU disconnected event.</div></div>
 <div class="ttc" id="aclassrito_1_1Lcu__wamp__handler_html_a11a94d11f7aa2ed4149464bdc2f9677e"><div class="ttname"><a href="classrito_1_1Lcu__wamp__handler.html#a11a94d11f7aa2ed4149464bdc2f9677e">rito::Lcu_wamp_handler::register_call_result_callback</a></div><div class="ttdeci">void register_call_result_callback(Wamp_call_result_callback on_call_result) noexcept</div><div class="ttdoc">Registers callback function for CALL.RESULT message received.</div></div>
